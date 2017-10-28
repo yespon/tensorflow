@@ -18,10 +18,10 @@
 ## 决定安装哪种类型的 TensorFlow 
 
 你需要从以下多种类型的 TensorFlow 中选择一个安装并构建：
-* ** TensorFlow 仅支持 CPU **. 如果你的系统不支持 NVIDIVA 的 GPU，需要安装这个版本. 
+* **TensorFlow 仅支持 CPU**. 如果你的系统不支持 NVIDIVA 的 GPU，需要安装这个版本. 
   值得注意的是，这个版本的 TensorFlow 通常容易安装构建，所以即使你有 NVIDIA 的 GPU，我们仍然推荐你先安装这个版本。
   
-* ** TensorFlow 支持 GPU **. TensorFlow programs typically run
+* **TensorFlow 支持 GPU**. TensorFlow programs typically run
   significantly faster on a GPU than on a CPU. Therefore, if your system
   has a NVIDIA GPU and you need to run performance-critical applications,
   you should ultimately build and install this version.
