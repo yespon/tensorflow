@@ -1,15 +1,12 @@
-# Installing TensorFlow from Sources
+# 通过源码安装 TensorFlow
 
-This guide explains how to build TensorFlow sources into a TensorFlow
-binary and how to install that TensorFlow binary.  Note that we provide
-well-tested, pre-built TensorFlow binaries for Linux, Mac, and Windows
-systems. In addition, there are pre-built TensorFlow
-[docker images](https://hub.docker.com/r/tensorflow/tensorflow/).
-So, don't build a TensorFlow binary yourself unless you are very
-comfortable building complex packages from source and dealing with
-the inevitable aftermath should things not go exactly as documented.
+本文将解释如何编译 TensorFlow 源代码为二进制代码，并通过二进制代码安装 Tensorflow，
+为 Linuc，Mac 和 Windows 系统提供经过测试良好，预构建好的二进制 Tensorflow 包，
+除此之外还提供 TensorFlow 的 [docker 镜像](https://hub.docker.com/r/tensorflow/tensorflow/)。
+所以建议不要自己尝试构建二进制 TensorFlow 代码，除非你能熟练通过源码构建复杂程序包，并且可以解决一些在文档中没有提到的不可预测的情况。
 
-If the last paragraph didn't scare you off, welcome.  This guide explains
+如果上一段
+If the last paragraph didn't scare you off, welcome.  This guide explai
 how to build TensorFlow on the following operating systems:
 
 *   Ubuntu
