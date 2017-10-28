@@ -1,35 +1,27 @@
 # 通过源码安装 TensorFlow
 
-本文将解释如何编译 TensorFlow 源代码为二进制代码，并通过二进制代码安装 Tensorflow，
-为 Linuc，Mac 和 Windows 系统提供经过测试良好，预构建好的二进制 Tensorflow 包，
+本文将解释如何编译 TensorFlow 源代码为二进制文件，并通过二进制文件安装 TensorFlow，
+需要注意的是，我们已经为 Linuc，Mac 和 Windows 系统提供经过测试良好，预构建好的二进制 Tensorflow 文件，
 除此之外还提供 TensorFlow 的 [docker 镜像](https://hub.docker.com/r/tensorflow/tensorflow/)。
 所以建议不要自己尝试构建二进制 TensorFlow 代码，除非你能熟练通过源码构建复杂程序包，并且可以解决一些在文档中没有提到的不可预测的情况。
 
-如果上一段
-If the last paragraph didn't scare you off, welcome.  This guide explai
-how to build TensorFlow on the following operating systems:
-
+如果上一段话没有吓退你，很高兴。这份指南将解释如何在以下操作系统上构建 TensorFlow：
 *   Ubuntu
 *   Mac OS X
 
-We don't officially support building TensorFlow on Windows; however, you may try
-to build TensorFlow on Windows if you don't mind using the highly experimental
+我们官方不支持在 Windows 上构建 TensorFlow，不过，如果你不介意参考
 [Bazel on Windows](https://bazel.build/versions/master/docs/windows.html)
-or
+或者
 [TensorFlow CMake build](https://github.com/tensorflow/tensorflow/tree/r0.12/tensorflow/contrib/cmake).
+的经验，你可以尝试在 Windows 上搭建 TensorFlow 
 
+## 选择安装那种类型的 TensorFlow
 
-## Determine which TensorFlow to install
-
-You must choose one of the following types of TensorFlow to build and
-install:
-
-* **TensorFlow with CPU support only**. If your system does not have a
-  NVIDIA® GPU, build and install this version. Note that this version of
-  TensorFlow is typically easier to build and install, so even if you
-  have an NVIDIA GPU, we recommend building and installing this version
-  first.
-* **TensorFlow with GPU support**. TensorFlow programs typically run
+你需要从以下多种类型的 TensorFlow 中选择一个，安装并构建：
+* **TensorFlow 仅支持 CPU **. 如果你的系统不支持 NVIDIVA 的 GPU，需要安装这个版本. 
+  值得注意的是，这个版本的 TensorFlow 通常容易安装构建，所以即使你有 NVIDIA 的 GPU，我们仍然推荐你先安装这个版本。
+  
+* **TensorFlow 支持 GPU **. TensorFlow programs typically run
   significantly faster on a GPU than on a CPU. Therefore, if your system
   has a NVIDIA GPU and you need to run performance-critical applications,
   you should ultimately build and install this version.
