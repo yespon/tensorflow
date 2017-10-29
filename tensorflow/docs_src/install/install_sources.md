@@ -21,12 +21,9 @@
 * **TensorFlow 仅支持 CPU**. 如果你的系统不支持 NVIDIVA 的 GPU，需要安装这个版本. 
   值得注意的是，这个版本的 TensorFlow 通常容易安装构建，所以即使你有 NVIDIA 的 GPU，我们仍然推荐你先安装这个版本。
   
-* **TensorFlow 支持 GPU**. TensorFlow programs typically run
-  significantly faster on a GPU than on a CPU. Therefore, if your system
-  has a NVIDIA GPU and you need to run performance-critical applications,
-  you should ultimately build and install this version.
-  Beyond the NVIDIA GPU itself, your system must also fulfill the NVIDIA
-  software requirements described in one of the following documents:
+* **TensorFlow 支持 GPU**. TensorFlow 程序在 GPU 上运行会明显比在 CPU 上快。
+  因此，如果你的系统有 NVIDIA 的 GPU，同时你需要运行对性能要求苛刻的程序时，你就需要安装这个版本的 TensorFlow，
+  不仅需要 NVIDIA 的 GPU，你的系统还需要满足 NVIDIA 软件的要求，具体描述参考以下文档：
 
   * @{$install_linux#NVIDIARequirements$Installing TensorFlow on Ubuntu}
   * @{$install_mac#NVIDIARequirements$Installing TensorFlow on Mac OS}
