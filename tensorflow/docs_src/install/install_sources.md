@@ -29,17 +29,17 @@
   * @{$install_mac#NVIDIARequirements$Installing TensorFlow on Mac OS}
 
 
-## Clone the TensorFlow repository
+## 克隆 TensorFlow 仓库
 
-Start the process of building TensorFlow by cloning a TensorFlow
-repository.
+首先从克隆 TensorFlow 仓库开始
 
-To clone **the latest** TensorFlow repository, issue the following command:
+克隆 **最新** TensorFlow 仓库, 执行以下命令:
 
 <pre>$ <b>git clone https://github.com/tensorflow/tensorflow</b> </pre>
 
-The preceding <code>git clone</code> command creates a subdirectory
-named `tensorflow`.  After cloning, you may optionally build a
+<code>git clone</code> 命令创建一个命名为 “tensorflow”
+ 的子目录。克隆完成后，你可以执行下面的命令，创建一个特定的分支（例如一个发布分支）
+ After cloning, you may optionally build a
 **specific branch** (such as a release branch) by invoking the
 following commands:
 
@@ -48,37 +48,34 @@ $ <b>cd tensorflow</b>
 $ <b>git checkout</b> <i>Branch</i> # where <i>Branch</i> is the desired branch
 </pre>
 
-For example, to work with the `r1.0` release instead of the master release,
-issue the following command:
+例如, 执行以下命令新建“r1.0”分支，替代 master 分支：
 
 <pre>$ <b>git checkout r1.0</b></pre>
 
-Next, you must prepare your environment for
+接下来你需要准备为
 [Linux](#PrepareLinux)
-or
-[Mac OS](#PrepareMac)
-
+或者
+[Mac OS](#PrepareMac)准备环境。
 
 <a name="#PrepareLinux"></a>
-## Prepare environment for Linux
+## 为 Linux 准备环境
 
-Before building TensorFlow on Linux, install the following build
-tools on your system:
+在 Linux 上构建 TensorFlow 之前， 你需要在你的系统上安装以下构建工具：
 
   * bazel
-  * TensorFlow Python dependencies
-  * optionally, NVIDIA packages to support TensorFlow for GPU.
+  * TensorFlow Python 依赖
+  * 可选, 为了支持 GPU 而安装的 NVIDIA 软件包 
 
 
-### Install Bazel
+### 安装 Bazel
 
-If bazel is not installed on your system, install it now by following
-[these directions](https://bazel.build/versions/master/docs/install.html).
+如果系统之前未安装 Bazel，需要按照以下说明安装
+[安装 Bazel](https://bazel.build/versions/master/docs/install.html).
 
 
-### Install TensorFlow Python dependencies
+### 安装 TensorFlow Python 依赖
 
-To install TensorFlow, you must install the following packages:
+安装 TensorFlow之前, 你必须安装以下安装包:
 
   * `numpy`, which is a numerical processing package that TensorFlow requires.
   * `dev`, which enables adding extensions to Python.
