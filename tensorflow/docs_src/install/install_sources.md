@@ -77,63 +77,61 @@ $ <b>git checkout</b> <i>Branch</i> # where <i>Branch</i> is the desired branch
 
 安装 TensorFlow之前, 你必须安装以下安装包:
 
-  * `numpy`, which is a numerical processing package that TensorFlow requires.
-  * `dev`, which enables adding extensions to Python.
-  * `pip`, which enables you to install and manage certain Python packages.
-  * `wheel`, which enables you to manage Python compressed packages in
-    the wheel (.whl) format.
+  * `numpy`, 一个 TensorFlow 需要安装的用于数值处理的包。
+  * `dev`, 用于添加 Python 扩展包。
+  * `pip`, 用于安装和管理 Python 包。
+  * `wheel`, 能够让你管理 Python 的 wheel 格式的压缩包。
 
-To install these packages for Python 2.7, issue the following command:
+执行以下命令，安装 Python 2.7 
 
 <pre>
 $ <b>sudo apt-get install python-numpy python-dev python-pip python-wheel</b>
 </pre>
 
-To install these packages for Python 3.n, issue the following command:
+执行以下命令，安装 Python 3.n
 
 <pre>
 $ <b>sudo apt-get install python3-numpy python3-dev python3-pip python3-wheel</b>
 </pre>
 
 
-### Optional: install TensorFlow for GPU prerequisites
+### 可选项: 安装支持 GPU 的 TensorFlow 之前的一些准备条件：
 
-If you are building TensorFlow without GPU support, skip this section.
+如果你构建的 TensorFlow 不支持 GPU，跳过以下步骤。
 
-The following NVIDIA <i>hardware</i> must be installed on your system:
+必须在你的系统中安装以下 NVIDIA <i>硬件</i>：
 
-  * GPU card with CUDA Compute Capability 3.0 or higher.  See
-    [NVIDIA documentation](https://developer.nvidia.com/cuda-gpus)
-    for a list of supported GPU cards.
+  * 支持 CUDA 3.0或以上的 GPU。 具体参考
+    [NVIDIA 文档](https://developer.nvidia.com/cuda-gpus)
+    查看支持的 GPU 列表。
 
-The following NVIDIA <i>software</i> must be installed on your system:
 
-  * NVIDIA's Cuda Toolkit (>= 7.0). We recommend version 8.0.
-    For details, see
-    [NVIDIA's documentation](http://docs.nvidia.com/cuda/cuda-installation-guide-linux/#axzz4VZnqTJ2A).
-    Ensure that you append the relevant Cuda pathnames to the
-    `LD_LIBRARY_PATH` environment variable as described in the
-    NVIDIA documentation.
-  * The NVIDIA drivers associated with NVIDIA's Cuda Toolkit.
-  * cuDNN (>= v3). We recommend version 5.1. For details, see
-    [NVIDIA's documentation](https://developer.nvidia.com/cudnn),
-    particularly the description of appending the appropriate pathname
-    to your `LD_LIBRARY_PATH` environment variable.
+必须在你的系统中安装以下 NVIDIA <i>软件</i>：
 
-Finally, you must also install `libcupti` which for Cuda Toolkit >= 8.0 you do via 
+  * NVIDIA's Cuda Toolkit (>= 7.0). 推荐 8.0版本.
+    详细可参考
+    [NVIDIA 文档](http://docs.nvidia.com/cuda/cuda-installation-guide-linux/#axzz4VZnqTJ2A).
+    确保按照文档要求添加 Cuda 相对路径 “LD_LIBRARY_PATH” 到环境变量。
+    
+  * 与 NVIDIA 的 Cuda 工具包匹配的驱动程序
+  * cuDNN (>= v3). 推荐 5.1版本. 细节参考
+    [NVIDIA 文档](https://developer.nvidia.com/cudnn),
+    注意将路径添加到 `LD_LIBRARY_PATH` 环境变量。
+    
+最后, 你必须安装 与 CUDA 工具包匹配的 `libcupti`>= 8.0
 
 <pre> $ <b>sudo apt-get install cuda-command-line-tools</b> </pre>
 
-and add its path to your `LD_LIBRARY_PATH` environment variable:
+添加路径到 `LD_LIBRARY_PATH` 环境变量:
 
 <pre> $ <b>export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/extras/CUPTI/lib64</b> </pre>
 
-For Cuda Toolkit <= 7.5, you install `libcupti-dev` by invoking the following command:
+如果 Cuda Toolkit <= 7.5, 通过调用下面的命令安装 `libcupti-dev`:
 
 <pre> $ <b>sudo apt-get install libcupti-dev</b> </pre>
 
 
-### Next
+### 接下来
 
 After preparing the environment, you must now
 [configure the installation](#ConfigureInstallation).
