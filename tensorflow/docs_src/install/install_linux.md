@@ -13,12 +13,12 @@
 <a name="英伟达要求标准"></a>
 ### NVIDIA 对于使用 GPU 运行 TensorFlow 的要求
 
-如果你正在利用本帮助中描述的方法之一来安装支持 GPU 的 TensorFlow，那么如下的 NVIDIA 软件必须安装于你的系统中：
+如果你正在利用本帮助中描述的方法之一来安装支持 GPU 的 TensorFlow，那么你的系统中必须要有如下的 NVIDIA 软件：
 
   * CUDA® Toolkit 8.0.（CUDA® 工具包 8.0） 更多请见
     [NVIDIA 英伟达的文档](http://docs.nvidia.com/cuda/cuda-installation-guide-linux/#axzz4VZnqTJ2A).
-  	请保证你将 Cuba 相关的路径像 NVIDIA 文档中所描述的那样附在 `LD_LIBRARY_PATH` 环境变量中。
-  * 与 CUDA Toolkit 8.0 相关的 NVIDIA 驱动。
+  	请保证你将 Cuda 相关的路径像 NVIDIA 文档中所描述的那样附在 `LD_LIBRARY_PATH` 环境变量中。
+  * 与 CUDA Toolkit 8.0 对应的 NVIDIA 驱动。
   * cuDNN v6.0。 详情见
     [NVIDIA 英伟达的文档](https://developer.nvidia.com/cudnn).
 	请保证你如 NVIDIA 文档中描述的那样创建了 `CUDA_HOME` 环境变量
@@ -43,7 +43,7 @@
     $ <b>sudo apt-get install libcupti-dev</b>
     </pre>
 
-如果你的包版本较早，请更新至指定的版本。如果无法升级，你仍有可能使用 GPU 支持的 TensorFlow，但需要你做如下事情：
+如果你的包版本较早，请更新至指定的版本。如果无法升级，你仍有可能使用 GPU 支持的 TensorFlow，但需要你进行如下步骤：
 
   * 使用如下文档中的来源安装 TensorFlow
     @{$install_sources$Installing TensorFlow from Sources}.
@@ -143,7 +143,7 @@ $ <b>source ~/tensorflow/bin/activate.csh</b>  # csh or tcsh</pre>
 
 <pre>(tensorflow)$ </pre>
 
-当你使用完 TensorFlow 之后，你可以通过 `deactivate` 来休眠该环境:
+当你使用完 TensorFlow 之后，你可以通过 `deactivate` 命令来休眠该环境:
 
 <pre>(tensorflow)$ <b>deactivate</b> </pre>
 
@@ -151,7 +151,7 @@ $ <b>source ~/tensorflow/bin/activate.csh</b>  # csh or tcsh</pre>
 
 ### 卸载 TensorFlow
 
-要卸载 TensorFlow，只需要简单地移除你所创建的整个文件树
+要卸载 TensorFlow，只需要简单地移除你所创建的整个目录树
 例如：
 
 <pre>$ <b>rm -r</b> <i>targetDirectory</i> </pre>
@@ -228,8 +228,7 @@ $ <b>sudo pip3 uninstall tensorflow</b> # for Python 3.n
   1. 如 [Docker 文档](http://docs.docker.com/engine/installation/)中所描述安装 Docker。
   2. 或者，创建一个 Linux group 叫做 <code>docker</code> 来如
      [Docker 文档](https://docs.docker.com/engine/installation/linux/linux-postinstall/)中所说，这样无需 sudo 命令即可运行容器.
-     (If you don't do this step, you'll have to use sudo each time
-     you invoke Docker.)
+     (如果你不做这一步，你需要在每次使用 Docker 时都使用 sudo 命令。)
   3. 要安装支持 GPU 的 TensorFlow，你必须先安装位于 GitHub 中的[nvidia-docker](https://github.com/NVIDIA/nvidia-docker)
   4. 运行包含[TensorFlow 二进制镜像](https://hub.docker.com/r/tensorflow/tensorflow/tags/)的 Docker。
 
@@ -273,7 +272,6 @@ $ <b>docker run -it gcr.io/tensorflow/tensorflow bash</b>
 $ <b>docker run -it -p 8888:8888 gcr.io/tensorflow/tensorflow</b>
 </pre>
 
-Docker will download the TensorFlow binary image the first time you launch it.
 Docker 将会在你第一次运行的时候下载 TensorFlow 二进制镜像。
 
 ### GPU 支持
@@ -343,7 +341,7 @@ Docker 会在你第一次运行的时候下载 TensorFlow 二进制镜像。更�
      <pre>(tensorflow)$ <b>pip install --ignore-installed --upgrade</b> <i>tfBinaryURL</i></pre>
 
      其中 <code><em>tfBinaryURL</em></code> 是
-     [ TensorFlow Python 包的 URL](#the_url_of_the_tensorflow_python_package).
+     [TensorFlow Python 包的 URL](#the_url_of_the_tensorflow_python_package).
     例如，如下命令安装了仅支持 CPU 的 Python 3.4 版本下的 TensorFlow：
 
      <pre>
@@ -359,7 +357,7 @@ Docker 会在你第一次运行的时候下载 TensorFlow 二进制镜像。更�
 
 
 ### 准备你的环境
-如果你是使用原生 pip，virtualenv 或者 Anaconda 安装的，那么做如下事情：
+如果你是使用原生 pip，virtualenv 或者 Anaconda 安装的，那么进行如下步骤：
 
   1. 开启一个终端。
   2. 如果是使用 virtualenv 或 Anaconda 安装，激活你的容器。 
@@ -392,7 +390,7 @@ print(sess.run(hello))
 
 <pre>Hello, TensorFlow!</pre>
 
-如果你仍然对 TensorFlow 比较陌生，看 @{$get_started/get_started$Getting Started with TensorFlow}.
+如果你仍然对 TensorFlow 比较陌生，请参照 @{$get_started/get_started$Getting Started with TensorFlow}.
 
 如果系统输出了一个错误信息，见[常见安装错误](#common_installation_problems).
 
