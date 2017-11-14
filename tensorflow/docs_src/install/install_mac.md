@@ -92,7 +92,7 @@ Docker 容器包含 TensorFlow 及其所有依赖项。
 
 ### 下一步
 
-安装 TensorFlow 之后，你可以
+安装 TensorFlow 之后，你需要
 [验证安装](#ValidateYourInstallation)
 来确保 TensorFlow 能够正常工作。
 
@@ -288,7 +288,7 @@ Docker 会在第一次启动容器时下载对应的镜像。
 
 
 
-### 运行简短的 TensorFlow 程序
+### 运行一个简短的 TensorFlow 程序
 
 在命令行中输入下面的命令调用 Python：
 
@@ -442,7 +442,7 @@ https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.4.0rc0-py3-none-a
 
 除非你遇到了与 protobuf pip package 相关的问题，否则你可以直接跳过该部分。
 
-**注意：**如果你的 TensorFlow 程序运行速度很慢，你可能有一个和 protobuf pip package 相关的问题。
+**注意**：如果你的 TensorFlow 程序运行速度很慢，你可能有一个和 protobuf pip package 相关的问题。
 
 TensorFlow pip 包依赖于 3.1 版本的 protobuf pip package。从 PyPI 下载的 protobuf pip package （使用<tt>pip install protobuf</tt> 命令） 是一个含有序列化、反序列化实现的纯 Python 库，可能比 C++ 的实现慢 **10 到 50 倍**。Protobuf 同时也支持针对 Python 包的一个二进制扩展，基于快速的 C++ 解析。这个扩展在纯 Python 的标准 pip 包中是没有的。我们已经创建了一个自定义的二进制 pip 包给含有二进制扩展的 protobuf。要安装自定义的二进制 protobuf pip package，执行如下的命令
 
