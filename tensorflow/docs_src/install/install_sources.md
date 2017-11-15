@@ -181,26 +181,22 @@ $ <b>sudo apt-get install python3-numpy python3-dev python3-pip python3-wheel</b
 
 <pre>$ <b>brew install coreutils</b></pre>
 
-如果你想编译 TensorFlow 而且安装的是 XCode 7.3 以及 CUDA 7.5，那么请注意 XCode 7.3 不能兼容 CUDA 7.5.为了
-If you want to compile tensorflow and have XCode 7.3 and CUDA 7.5 installed,
-note that Xcode 7.3 is not yet compatible with CUDA 7.5.  To remedy this
-problem, do either of the following:
+如果你想编译 TensorFlow 而且安装的是 XCode 7.3 以及 CUDA 7.5，那么请注意 XCode 7.3 不能兼容 CUDA 7.5.为了弥补这个问题可以参考以下步骤
 
-  * Upgrade to CUDA 8.0.
-  * Download Xcode 7.2 and select it as your default by issuing the following
-    command:
+  * 更新 CUDA 到 8.0.
+  * 下载 Xcode 7.2 并执行以下命令，设置其作为默认的编辑器:
 
     <pre> $ <b>sudo xcode-select -s /Application/Xcode-7.2/Xcode.app</b></pre>
 
-**NOTE:** Your system must fulfill the NVIDIA software requirements described
-in one of the following documents:
+**注意:** 你的系统需要支持 NVIDIA 软件需求，具体参考以下文档
+
 
   * @{$install_linux#NVIDIARequirements$Installing TensorFlow on Linux}
   * @{$install_mac#NVIDIARequirements$Installing TensorFlow on Mac OS}
 
 
 <a name="ConfigureInstallation"></a>
-## Configure the installation
+## 配置安装
 
 The root of the source tree contains a bash script named
 <code>configure</code>. This script asks you to identify the pathname of all
