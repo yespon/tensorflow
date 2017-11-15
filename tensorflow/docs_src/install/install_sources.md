@@ -161,21 +161,20 @@ $ <b>sudo apt-get install python3-numpy python3-dev python3-pip python3-wheel</b
   * numpy, 一个 TensorFlow 需要的用于数值处理的包.
   * wheel, 能够让你管理 Python 的 wheel 格式的压缩包。
 
-你可以
+你可以通过 pip 安装 Python 依赖，如果机器上没有 pip，我们推荐使用 homebrew 去安装 Python 以及 pip，参考
 
-You may install the python dependencies using pip. If you don't have pip
-on your machine, we recommend using homebrew to install Python and pip as
-[documented here](http://docs.python-guide.org/en/latest/starting/install/osx/).
-If you follow these instructions, you will not need to disable SIP.
+[文档](http://docs.python-guide.org/en/latest/starting/install/osx/)进行安装.
+如果按照以上介绍安装，将不需要禁用 SIP。
 
-After installing pip, invoke the following commands:
+安装完 pip,调用以下命令 :
 
 <pre> $ <b>sudo pip install six numpy wheel</b> </pre>
 
 
 
-### Optional: install TensorFlow for GPU prerequisites
+### 可选项: 安装支持 GPU 的 TensorFlow 时需要的前提条件 
 
+如果你不没有安装 brew，参考
 If you do not have brew installed, install it by following
 [these instructions](http://brew.sh/).
 
