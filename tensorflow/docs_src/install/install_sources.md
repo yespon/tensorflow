@@ -133,34 +133,35 @@ $ <b>sudo apt-get install python3-numpy python3-dev python3-pip python3-wheel</b
 
 ### 接下来
 
-After preparing the environment, you must now
-[configure the installation](#ConfigureInstallation).
+环境搭建好之后，你必须参考
+[安装指南](#ConfigureInstallation).
 
 
 <a name="PrepareMac"></a>
-## Prepare environment for Mac OS
+## Mac OS 安装准备
 
-Before building TensorFlow, you must install the following on your system:
+ 构建 TensorFlow 之前, 须在你的系统上安装以下工具:
 
   * bazel
-  * TensorFlow Python dependencies.
-  * optionally, NVIDIA packages to support TensorFlow for GPU.
+  * TensorFlow Python 依赖.
+  * 可选项：NVIDIA 工具包（支持 GPU 的 TensorFlow 版本）.
 
 
-### Install bazel
+### 安装 bazel
 
-If bazel is not installed on your system, install it now by following
-[these directions](https://bazel.build/versions/master/docs/install.html#mac-os-x).
+如果系统没有安装 Bazel ，参考
+[指导](https://bazel.build/versions/master/docs/install.html#mac-os-x)安装 Bazel.
 
 
-### Install python dependencies
+### 安装 python 依赖
 
-To install TensorFlow, you must install the following packages:
+安装 TensorFlow，需要安装以下依赖饱：
 
   * six
-  * numpy, which is a numerical processing package that TensorFlow requires.
-  * wheel, which enables you to manage Python compressed packages
-    in the wheel (.whl) format.
+  * numpy, 一个 TensorFlow 需要的用于数值处理的包.
+  * wheel, 能够让你管理 Python 的 wheel 格式的压缩包。
+
+你可以
 
 You may install the python dependencies using pip. If you don't have pip
 on your machine, we recommend using homebrew to install Python and pip as
