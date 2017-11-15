@@ -174,14 +174,14 @@ $ <b>sudo apt-get install python3-numpy python3-dev python3-pip python3-wheel</b
 
 ### 可选项: 安装支持 GPU 的 TensorFlow 时需要的前提条件 
 
-如果你不没有安装 brew，参考
-If you do not have brew installed, install it by following
-[these instructions](http://brew.sh/).
+如果你没有安装 brew，可以参考
+[指导](http://brew.sh/).
 
-After installing brew, install GNU coreutils by issuing the following command:
+安装完 brew, 按照以下命令安装 GNU 工具:
 
 <pre>$ <b>brew install coreutils</b></pre>
 
+如果你想编译 TensorFlow 而且安装的是 XCode 7.3 以及 CUDA 7.5，那么请注意 XCode 7.3 不能兼容 CUDA 7.5.为了
 If you want to compile tensorflow and have XCode 7.3 and CUDA 7.5 installed,
 note that Xcode 7.3 is not yet compatible with CUDA 7.5.  To remedy this
 problem, do either of the following:
