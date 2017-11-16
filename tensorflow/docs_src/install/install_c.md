@@ -6,6 +6,7 @@ TensorFlow 在 [`c_api.h`](https://github.com/tensorflow/tensorflow/blob/master/
 ## 支持的平台
 
 你可能会在下面的操作系统上安装用于 C 的 TensorFlow：
+
   * Linux
   * Mac OS X
 
