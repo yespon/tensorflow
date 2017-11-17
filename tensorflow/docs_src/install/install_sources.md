@@ -205,17 +205,17 @@ $ <b>sudo apt-get install python3-numpy python3-dev python3-pip python3-wheel</b
 如果你希望构建的 TensorFlow 支持 GPU，`configure`将会要求你指明安装在系统上的 Cuda 以及 cuDNN 的版本，
 明确选择期望的版本取代默认选项。
 
-`configure` 将会:
-the desired version instead of relying on the default.
-the desired version instead of relying on the default.
+`configure` 将会询问以下内容:
 
 <pre>
 Please specify optimization flags to use during compilation when bazel option "--config=opt" is specified [Default is -march=native]
 </pre>
 
-This question refers to a later phase in which you'll use bazel to 
-[build the pip package](#build-the-pip-package).  We recommend 
-accepting the default (`-march=native`), which will
+这里指的是可以在后面指定你用来[构建 pip 安装包](#build-the-pip-package) 的 Bazel 方式。
+我们推荐使用默认选项(`-march=native`)，这个
+which will
+accepting the default , which will
+accepting the default , which will
 optimize the generated code for your local machine's CPU type.  However,
 if you are building TensorFlow on one CPU type but will run TensorFlow on
 a different CPU type, then consider specifying a more specific optimization
