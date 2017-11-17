@@ -198,18 +198,16 @@ $ <b>sudo apt-get install python3-numpy python3-dev python3-pip python3-wheel</b
 <a name="ConfigureInstallation"></a>
 ## 配置安装
 
-The root of the source tree contains a bash script named
-<code>configure</code>. This script asks you to identify the pathname of all
-relevant TensorFlow dependencies and specify other build configuration options
-such as compiler flags. You must run this script *prior* to
-creating the pip package and installing TensorFlow.
+在文件夹根目录里有一个命名为<code>configure</code> 的 bash 脚本。
+这个脚本会要求你定义与 TensorFlow 相关依赖路径以及指定其他相关的配置选项，例如编译器标记。
+你必须在创建 pip 包以及安装 TensorFlow *之前*运行这个脚本。
 
-If you wish to build TensorFlow with GPU, `configure` will ask
-you to specify the version numbers of Cuda and cuDNN. If several
-versions of Cuda or cuDNN are installed on your system, explicitly select
+如果你希望构建的 TensorFlow 支持 GPU，`configure`将会要求你指明安装在系统上的 Cuda 以及 cuDNN 的版本，
+明确选择期望的版本取代默认选项。
+
+`configure` 将会:
 the desired version instead of relying on the default.
-
-One of the questions that `configure` will ask is as follows:
+the desired version instead of relying on the default.
 
 <pre>
 Please specify optimization flags to use during compilation when bazel option "--config=opt" is specified [Default is -march=native]
