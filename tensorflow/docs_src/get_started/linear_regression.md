@@ -68,7 +68,7 @@ watch the following video:
 
 1. 从 github 上 clone TensorFlow 的仓库。
 2. 使用 `cd` 命令切换至下载路径的顶层。
-3. 切换到你 tensorflow 当前版本的分支：`git checkout rX.X`
+3. 切换到你的 tensorflow 当前版本所在的分支：`git checkout rX.X`
 4. `cd tensorflow/examples/get_started/regression`。
 
 你现在可以通过 Python 运行 TensorFlow  `tensorflow/examples/get_started/regression` 目录下的任何示例：
@@ -133,7 +133,7 @@ INFO:tensorflow:Loss for final step: 5.12413.
 <a name="categorical"></a>
 ## linear_regression_categorical.py
 
-这个程序给我们说明了标识分类特征的一些方法。同时也展示了如何基于分类和数值特征来训练一个线性模型。
+这个程序向我们说明了标识分类特征的一些方法。同时也展示了如何基于分类和数值特征来训练一个线性模型。
 
 <table>
   <tr>
