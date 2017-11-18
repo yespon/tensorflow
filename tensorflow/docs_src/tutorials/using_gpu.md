@@ -1,37 +1,32 @@
-# Using GPUs
+# 使用（多个） GPU
 
-## Supported devices
+## 支持的设备
 
-On a typical system, there are multiple computing devices. In TensorFlow, the
-supported device types are `CPU` and `GPU`. They are represented as `strings`.
-For example:
+在一个典型的系统上，有多个计算设备。 在 TensorFlow 中，支持的设备类型是 “CPU” 和 “GPU” 。 它们都是字符串形式。
+举个例子：
 
-*   `"/cpu:0"`: The CPU of your machine.
-*   `"/device:GPU:0"`: The GPU of your machine, if you have one.
-*   `"/device:GPU:1"`: The second GPU of your machine, etc.
+*   `"/cpu:0"`: 你的机器上的CPU。
+*   `"/device:GPU:0"`: 你的机器上的GPU（如果有的话）。
+*   `"/device:GPU:1"`: 你的机器上的第二块 GPU ，以此类推。
 
-If a TensorFlow operation has both CPU and GPU implementations, the GPU devices
-will be given priority when the operation is assigned to a device. For example,
-`matmul` has both CPU and GPU kernels. On a system with devices `cpu:0` and
-`gpu:0`, `gpu:0` will be selected to run `matmul`.
+如果某个 TensorFlow 的操作同时有 CPU 和 GPU 的实现，当这个操作需要分配给设备时，会优先选择 GPU 。 例如，`matmul`有 CPU 和 GPU 的内核， 在设备 “cpu：0” 和 “gpu：0” 的系统上，将选择 “gpu：0” 来执行 “matmul” 。
 
-## Logging Device placement
+## 记录设备的位置
 
-To find out which devices your operations and tensors are assigned to, create
-the session with `log_device_placement` configuration option set to `True`.
+如果要找出你的操作和张量被分配给了哪些设备，请将 `log_device_placement` 设置为 `True` 来配置 session。
 
 ```python
-# Creates a graph.
+# 创建一个 graph。
 a = tf.constant([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], shape=[2, 3], name='a')
 b = tf.constant([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], shape=[3, 2], name='b')
 c = tf.matmul(a, b)
-# Creates a session with log_device_placement set to True.
+# 创建一个将 log_device_placement 设置为 True 的 session。
 sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
-# Runs the op.
+# 运行这个操作。
 print(sess.run(c))
 ```
 
-You should see the following output:
+你会看到以下的输出:
 
 ```
 Device mapping:
@@ -45,29 +40,25 @@ MatMul: /job:localhost/replica:0/task:0/device:GPU:0
 
 ```
 
-## Manual device placement
+## 手动设置设备
 
-If you would like a particular operation to run on a device of your choice
-instead of what's automatically selected for you, you can use `with tf.device`
-to create a device context such that all the operations within that context will
-have the same device assignment.
+如果你希望某个特定操作在您选择的设备上运行，而不是自动选择，可以使用 tf.device 创建设备的上下文，以便该上下文中的所有操作都使用你所指定的设备运行。
 
 ```python
-# Creates a graph.
+# 创建一个 graph。
 with tf.device('/cpu:0'):
   a = tf.constant([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], shape=[2, 3], name='a')
   b = tf.constant([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], shape=[3, 2], name='b')
 c = tf.matmul(a, b)
-# Creates a session with log_device_placement set to True.
+# 创建一个将 log_device_placement 设置为 True 的 session。
 sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
-# Runs the op.
+# 运行这个操作。
 print(sess.run(c))
 ```
 
-You will see that now `a` and `b` are assigned to `cpu:0`. Since a device was
-not explicitly specified for the `MatMul` operation, the TensorFlow runtime will
-choose one based on the operation and available devices (`gpu:0` in this
-example) and automatically copy tensors between devices if required.
+可以看到 `a` 和 `b` 被分配给了 `cpu:0` 。由于没有指定设备执行 `Matmul` 操作，TensorFlow 运行的时候会自动选择 `gpu:0` 执行 `Matmul` 。
+
+
 
 ```
 Device mapping:
@@ -80,24 +71,14 @@ MatMul: /job:localhost/replica:0/task:0/device:GPU:0
  [ 49.  64.]]
 ```
 
-## Allowing GPU memory growth
+## 允许 GPU 显存增长
 
-By default, TensorFlow maps nearly all of the GPU memory of all GPUs (subject to
-[`CUDA_VISIBLE_DEVICES`](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#env-vars))
-visible to the process. This is done to more efficiently use the relatively
-precious GPU memory resources on the devices by reducing [memory
-fragmentation](https://en.wikipedia.org/wiki/Fragmentation_\(computing\)).
 
-In some cases it is desirable for the process to only allocate a subset of the
-available memory, or to only grow the memory usage as is needed by the process.
-TensorFlow provides two Config options on the Session to control this.
+默认情况下， Tensorflow 会使用所有 GPU 上的的几乎所有的显存（取决于系统环境变量[`CUDA_VISIBLE_DEVICES`](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#env-vars)）去运行程序。这样做是为了通过减少[内存碎片](https://en.wikipedia.org/wiki/Fragmentation_\(computing\))来更有效利用设备上相对宝贵的GPU显存资源。
 
-The first is the `allow_growth` option, which attempts to allocate only as much
-GPU memory based on runtime allocations: it starts out allocating very little
-memory, and as Sessions get run and more GPU memory is needed, we extend the GPU
-memory region needed by the TensorFlow process. Note that we do not release
-memory, since that can lead to even worse memory fragmentation. To turn this
-option on, set the option in the ConfigProto by:
+在某些情况下，进程只需要分配一小部分可用显存，或仅根据进程需要增加显存使用量。TensorFlow 在会话上提供了两个 Config 选项来设置。
+
+第一个方法是 `allow_growth` 选项，仅根据程序运行的分配尝试分配尽可能多的 GPU 显存：它一开始分配很少的内存，当 Sessions 运行并需要更多的 GPU 显存时，拓展 Tensorflow 程序所需要的 GPU 显存区域。注意，我们不会释放显存，因为这会导致非常糟糕的内存碎片。可以在 ConfigProto 打开这个选项：
 
 ```python
 config = tf.ConfigProto()
@@ -105,10 +86,7 @@ config.gpu_options.allow_growth = True
 session = tf.Session(config=config, ...)
 ```
 
-The second method is the `per_process_gpu_memory_fraction` option, which
-determines the fraction of the overall amount of memory that each visible GPU
-should be allocated. For example, you can tell TensorFlow to only allocate 40%
-of the total memory of each GPU by:
+第二个方法是 `pre_process_gpu_memory_fraction` 选项，它决定了每个可见的 GPU 应该被分配百分之多少的显存。例如，你想让 TensorFlow 仅仅分配总显存的 40% ，就这么做：
 
 ```python
 config = tf.ConfigProto()
@@ -116,29 +94,25 @@ config.gpu_options.per_process_gpu_memory_fraction = 0.4
 session = tf.Session(config=config, ...)
 ```
 
-This is useful if you want to truly bound the amount of GPU memory available to
-the TensorFlow process.
+如果您想真正限制可用于 TensorFlow 进程的 GPU 显存用量，这是非常有用的。
 
-## Using a single GPU on a multi-GPU system
+## 在一个多 GPU 机器上使用单个 GPU
 
-If you have more than one GPU in your system, the GPU with the lowest ID will be
-selected by default. If you would like to run on a different GPU, you will need
-to specify the preference explicitly:
+如果你的机器上有不止一个 GPU ，那么 Tensorflow 默认会使用 ID 编号最小的那个。如果你想在别的 GPU 上运行，你需要明确指定 GPU 的 ID：
 
 ```python
-# Creates a graph.
+# 创建一个 graph。
 with tf.device('/device:GPU:2'):
   a = tf.constant([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], shape=[2, 3], name='a')
   b = tf.constant([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], shape=[3, 2], name='b')
   c = tf.matmul(a, b)
-# Creates a session with log_device_placement set to True.
+# 创建一个将 log_device_placement 设置为 True 的 session。
 sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
-# Runs the op.
+# 运行这个操作。
 print(sess.run(c))
 ```
 
-If the device you have specified does not exist, you will get
-`InvalidArgumentError`:
+如果你指定的设备不存在，你会得到一个错误 ：`InvalidArgumentError` 。
 
 ```
 InvalidArgumentError: Invalid argument: Cannot assign a device to node 'b':
@@ -147,33 +121,29 @@ Could not satisfy explicit device specification '/device:GPU:2'
    values: 1 2 3...>, _device="/device:GPU:2"]()]]
 ```
 
-If you would like TensorFlow to automatically choose an existing and supported
-device to run the operations in case the specified one doesn't exist, you can
-set `allow_soft_placement` to `True` in the configuration option when creating
-the session.
+如果你想让 Tensorflow 自动选择现有且受支持的设备来运行操作，以防指定的设备不存在，你可以在创建 session 时在配置选项中将 `allow_soft_placement` 设置为 `True`。
 
 ```python
-# Creates a graph.
+# 创建一个 graph。
 with tf.device('/device:GPU:2'):
   a = tf.constant([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], shape=[2, 3], name='a')
   b = tf.constant([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], shape=[3, 2], name='b')
   c = tf.matmul(a, b)
 # Creates a session with allow_soft_placement and log_device_placement set
-# to True.
+# 创建一个将 allow_soft_placement 和 log_device_placement 设置为 True 的 session。
 sess = tf.Session(config=tf.ConfigProto(
       allow_soft_placement=True, log_device_placement=True))
-# Runs the op.
+# 运行这个操作。
 print(sess.run(c))
 ```
 
-## Using multiple GPUs
+## 使用多个 GPU
 
-If you would like to run TensorFlow on multiple GPUs, you can construct your
-model in a multi-tower fashion where each tower is assigned to a different GPU.
-For example:
+如果你想在多个 GPU 上运行 Tensorflow ，可以采用 multi-tower 的方式构建模型，其中每个 tower 分配给不同的 GPU 。
+举个例子：
 
-```
-# Creates a graph.
+```python
+# 创建一个 graph。
 c = []
 for d in ['/device:GPU:2', '/device:GPU:3']:
   with tf.device(d):
@@ -182,13 +152,13 @@ for d in ['/device:GPU:2', '/device:GPU:3']:
     c.append(tf.matmul(a, b))
 with tf.device('/cpu:0'):
   sum = tf.add_n(c)
-# Creates a session with log_device_placement set to True.
+# 创建一个将 log_device_placement 设置为 True 的 session。
 sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
-# Runs the op.
+# 运行这个操作。
 print(sess.run(sum))
 ```
 
-You will see the following output.
+你会看到以下输出：
 
 ```
 Device mapping:
@@ -211,5 +181,4 @@ AddN: /job:localhost/replica:0/task:0/cpu:0
  [  98.  128.]]
 ```
 
-The @{$deep_cnn$cifar10 tutorial} is a good example
-demonstrating how to do training with multiple GPUs.
+@{$deep_cnn$cifar10 tutorial} 是演示如何使用多个 GPU 进行训练的一个很好的例子。
