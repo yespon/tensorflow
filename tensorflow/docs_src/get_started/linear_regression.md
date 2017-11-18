@@ -1,6 +1,6 @@
-# 线性回归示例
+# 回归示例
 
-本章将提供下面的这些例子来说明如何实现线性回归：
+本章提供下面这些简短的例子来说明如何在 Estimators 中实现回归算法：
 
 <table>
   <tr> <th>Example</th> <th>Data Set</th> <th>Demonstrates How To...</th></tr>
@@ -31,7 +31,7 @@
 
 </table>
 
-上面的例子依赖于下面的数据集：
+上面的例子依赖于以下数据集程序：
 
 <table>
   <tr> <th>Utility</th> <th>Description</th></tr>
@@ -67,7 +67,7 @@ watch the following video:
 你必须先 @{$install$安装 TensorFlow} 才能运行这些示例。根据你安装 TensorFlow 的方式，你或许还需要激活你的 TensorFlow 的运行环境。然后按照下面的步骤操作：
 
 1. 从 github 上 clone TensorFlow 的仓库。
-2. `cd` 到下载树的顶层。
+2. 使用 `cd` 命令切换至下载路径的顶层。
 3. 切换到你 tensorflow 当前版本的分支：`git checkout rX.X`
 4. `cd tensorflow/examples/get_started/regression`。
 
@@ -77,7 +77,7 @@ watch the following video:
 python linear_regressor.py
 ```
 
-在训练期间，所有的三个程序将会输出下面这些信息：
+在训练期间，三个程序都会输出以下信息：
 
 * 检查点目录的名字，这对于 TensorBoard 来说很重要。
 * 每迭代 100 步之后的训练误差，这个数值可以帮助你确定模型是否正在收敛。
@@ -198,6 +198,6 @@ INFO:tensorflow:Loss for final step: 5.12413.
 
 `custom_regression.py` 这个例子同样也是基于真实价格和分类作为输入来预测汽车价格的模型。不像 `linear_regression_categorical.py` 和 `dnn_regression.py`，这个例子没有使用预估计量，而是使用 @{tf.estimator.Estimator$`Estimator`} 类定义了一个自定义模型。这个自定义模型与 `dnn_regression.py` 定义的模型十分相似。
 
-这个自定义模型是通过构造器的参数 `model_fn` 来定义的。因为 `params` 字典的存在可以让这个定制化的复用性更高，
+这个自定义模型是通过构造器的参数 `model_fn` 来定义的。当 `model_fn` 被调用时，`params` 字典会被传入 `model_fn`，这样使得模型的复用性更高。
 
 `model_fn` 将会返回一个 @{tf.estimator.EstimatorSpec$`EstimatorSpec`}，它是一个简单的可以表示 `Estimator` 的结构。
