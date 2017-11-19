@@ -263,13 +263,12 @@ MPI support will not be enabled for TensorFlow
 Configuration finished
 </pre>
 
-If you told `configure` to build for GPU support, then `configure`
-will create a canonical set of symbolic links to the Cuda libraries
-on your system.  Therefore, every time you change the Cuda library paths,
-you must rerun the `configure` script before re-invoking
-the <code>bazel build</code> command.
+如果你告知 `configure` 去支持 GPU ， `configure` 将会创建一个规范的符号链接你系统上的 Cuda 库，
+因此每次你改变 Cuda 库路径时候你必须在重新调用 <code>bazel build</code> 命令前运行 `configure` 脚本。
 
-Note the following:
+on your system.  Therefore, every time you change the Cuda library paths,
+
+注意:
 
   * Although it is possible to build both Cuda and non-Cuda configs
     under the same source tree, we recommend running `bazel clean` when
