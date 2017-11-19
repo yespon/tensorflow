@@ -2,13 +2,27 @@
 
 本指南可以让你在 TensorFlow 中进行编程。在开始本指南之前，请先[安装 TensorFlow](https://www.tensorflow.org/install/index)。为了能够更好的利用本指南，你应当了解如下知识：
 
+
+
 *   如何使用 Python 编程
 *   至少了解数组知识
 *   理想情况下了解一些机器学习知识，当然，即使你不了解机器学习，本指南也会是你应该阅读的第一个指南。
 
+
+
 TensorFlow 提供了多种 API。其中最底层的 API —— TensorFlow Core 能够为你提供完整的编程控制功能。我们向机器学习研究人员和其他需要对模型进行良好控制人员推荐使用 TensorFlow Core。更高级的 API 是构建在 TensorFlow Core 之上。这些更高级的 API 通常比 TensorFlow Core 更容易学习和使用。此外，这些更高级的 API 使得不同用户之间的重复性任务更加简单且更具有一致性。像 `tf.setimator` 这样高级的 API 能够帮你管理数据集、评估器、训练以及推理。
 
+
+
+
+
+
+
+
+
 本指南将从 TensorFlow Core 开始介绍。然后我们会演示如何在 `tf.estimator` 中实现相同的模型。了解 TensorFlow Core 的原理，能够给为提供一个更好的心智模型（或经验模型），以便于当你频繁使用更高级的 API时了解其内部工作情况。
+
+
 
 # 张量
 
