@@ -266,32 +266,28 @@ Configuration finished
 如果你告知 `configure` 去支持 GPU ， `configure` 将会创建一个规范的符号链接你系统上的 Cuda 库，
 因此每次你改变 Cuda 库路径时候你必须在重新调用 <code>bazel build</code> 命令前运行 `configure` 脚本。
 
-on your system.  Therefore, every time you change the Cuda library paths,
-
-注意:
-
-  * Although it is possible to build both Cuda and non-Cuda configs
-    under the same source tree, we recommend running `bazel clean` when
-    switching between these two configurations in the same source tree.
-  * If you don't run the `configure` script *before* running the
-    `bazel build` command, the `bazel build` command will fail.
+注意以下几点:
 
 
-## Build the pip package
+  * 虽然可以构建 Cuda 和 non-Cuda 配置在同样的源代码树,我们建议在相同的源代码树运行 `bazel clean` 当切换这两个配置。
+ 
+  * 如果你在运行 `bazel build` 命令之前没有运行 `configure` 脚本* *, `bazel build` 命令将会失败。
 
-To build a pip package for TensorFlow with CPU-only support,
-you would typically invoke the following command:
+## 构建 pip 包
 
+仅支持 CPU 的情况下，调用下面的命令建立一个TensorFlow pip 包：
 <pre>
 $ <b>bazel build --config=opt //tensorflow/tools/pip_package:build_pip_package</b>
 </pre>
 
+
+支持 GPU 的情况下，调用下面的命令建立一个TensorFlow pip 包：
 To build a pip package for TensorFlow with GPU support,
 invoke the following command:
 
 <pre>$ <b>bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:build_pip_package</b> </pre>
 
-**NOTE on gcc 5 or later:** the binary pip packages available on the
+**注意需要在 gcc 5 或者更高版本上:** the binary pip packages available on the
 TensorFlow website are built with gcc 4, which uses the older ABI. To
 make your build compatible with the older ABI, you need to add
 `--cxxopt="-D_GLIBCXX_USE_CXX11_ABI=0"` to your `bazel build` command.
