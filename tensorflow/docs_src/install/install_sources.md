@@ -213,17 +213,12 @@ Please specify optimization flags to use during compilation when bazel option "-
 
 这里指的是可以在后面指定你用来[构建 pip 安装包](#build-the-pip-package) 的 Bazel 方式。
 我们推荐使用默认选项(`-march=native`)，这个
-which will
-accepting the default , which will
-accepting the default , which will
-optimize the generated code for your local machine's CPU type.  However,
-if you are building TensorFlow on one CPU type but will run TensorFlow on
-a different CPU type, then consider specifying a more specific optimization
-flag as described in [the gcc
-documentation](https://gcc.gnu.org/onlinedocs/gcc-4.5.3/gcc/i386-and-x86_002d64-Options.html).
+会根据你本地机器的 CPU 类型优化生成的代码，需要参考
+如果你正在构建的 TensorFlow 的 CPU 类型与将要运行的 CPU 类型不同，需要参考[the gcc
+documentation](https://gcc.gnu.org/onlinedocs/gcc-4.5.3/gcc/i386-and-x86_002d64-Options.html)进一步的优化。
 
-Here is an example execution of the `configure` script.  Note that your
-own input will likely differ from our sample input:
+这里展示一个运行 `configure` 脚本的例子，注意你自己的输入可能不同于例子中的输入
+
 
 <pre>
 $ <b>cd tensorflow</b>  # cd to the top-level directory created
