@@ -6,7 +6,7 @@
 *   至少了解数组知识
 *   理想情况下了解一些机器学习知识，当然，即使你不了解机器学习，本指南也会是你应该阅读的第一个指南。
 
-TensorFlow 提供了多种 API。其中最底层的 API —— TensorFlow Core 能够为你提供完整的编程控制功能。我们向机器学习研究人员和其他需要对模型进行良好控制人员推荐使用 TensorFlow Core。更高级的 API 是构建在 TensorFlow Core 之上。这些更高级的 API 通常比 TensorFlow Core 更容易学习和使用。此外，这些更高级的 API 使得不同用户之间的重复性任务更加简单且更具有一致性。像 `tf.setimator` 这样高级的 API 能够帮你管理数据集、评估器、训练以及推理。
+TensorFlow 提供了多种 API。其中最底层的 API —— TensorFlow Core 能够为你提供完整的编程控制功能。我们向机器学习研究人员和其他需要对模型进行精准控制人员推荐使用 TensorFlow Core。更高级的 API 是构建在 TensorFlow Core 之上。这些更高级的 API 通常比 TensorFlow Core 更容易学习和使用。此外，这些更高级的 API 使得不同用户之间的重复性任务更加简单且更具有一致性。像 `tf.estimator` 这样高级的 API 能够帮你管理数据集、评估器、训练以及推理。
 
 本指南将从 TensorFlow Core 开始介绍。然后我们会演示如何在 `tf.estimator` 中实现相同的模型。了解 TensorFlow Core 的原理，能够给为提供一个更好的心智模型（或经验模型），以便于当你频繁使用更高级的 API时了解其内部工作情况。
 
@@ -15,35 +15,35 @@ TensorFlow 提供了多种 API。其中最底层的 API —— TensorFlow Core �
 TensorFlow 的核心数据单位就是**张量**。张量可看做是由原始值组成的 n 维度数组。张量的**阶**就是它的维度。下面是一些关于张量的例子：
 
 ```python
-3 # 0 阶张量，纯量（只有大小）
-[1., 2., 3.] # 1 阶张量，向量（大小和方向）
-[[1., 2., 3.], [4., 5., 6.]] # 2 阶张量，矩阵（数据表）
-[[[1., 2., 3.]], [[7., 8., 9.]]] # 3 阶张量，数据立体
+3 # 0 阶张量，标量的 shape 为 []
+[1., 2., 3.] # 1 阶张量，此向量的 shape 为 [3]
+[[1., 2., 3.], [4., 5., 6.]] # 2 阶张量，此矩阵的 shape 为 [2, 3]
+[[[1., 2., 3.]], [[7., 8., 9.]]] # 3 阶张量，shape 为 [2, 1, 3]
 ```
 
 ## TensorFlow Core 教程
 
 ### 导入 TensorFlow
 
-TensorFlow 程序的规范导入声明如下：
+导入 TensorFlow 程序模块的语法格式如下：
 
 ```python
 import tensorflow as tf
 ```
 这使 Python 可以使用 TensorFlow 所有的类、方法和符号。绝大部分文档都会假定你已经完成了导入的部分。
 
-### 构建数据流图（或计算图）
+### 计算图
 
 你可以认为 TensorFlow Core 程序由以下两个独立部分组成：
 
-1.  创建数据流图
-2.  运行数据流图
+1.  创建计算图
+2.  运行计算图
 
-**计算图**是一系列排列成节点的图形组成的 TensorFlow 操作。我们来构建一个简单的数据流图。每个节点采用零个或者多个张量作为输入，并以张量形式输出。一种节点类型就是一个常量。就像所有的 TensorFlow 常量一样，它不需要任何输入，然后它会输出一个内部存储的值。我们可以创建两个浮点型张量 `noder1` 和 `node2`，如下所示：
+**计算图**是一系列 TensorFlow 运算作为节点组成的节点图。我们来构建一个简单的计算图。每个节点采用零个或者多个张量作为输入，并产生一个张量作为输出。一种节点类型就是一个常量。就像所有的 TensorFlow 常量一样，它不需要任何输入，然后它会输出一个内部存储的值。我们可以创建两个浮点型张量 `noder1` 和 `node2`，如下所示：
 
 ```python
 node1 = tf.constant(3.0, dtype=tf.float32)
-node2 = tf.constant(4.0) # 也是 tf.float32
+node2 = tf.constant(4.0) # 如果未设置dtype，则隐含表示dtype为tf.float32
 print(node1, node2)
 ```
 
@@ -53,9 +53,9 @@ print(node1, node2)
 Tensor("Const:0", shape=(), dtype=float32) Tensor("Const_1:0", shape=(), dtype=float32)
 ```
 
-请注意，打印出的节点结果并没有像你想象那样输出值是 `3.0` 和 `4.0`。取而代之的是，它们会在评估时各自产生 3.0 和 4.0 的节点。要实际的评估节点，我们必须使用 **会话（session）** 来运行数据流图。会话封装了 TensorFlow 运行时的控制和状态。
+请注意，打印出的节点结果并没有像你想象那样输出值是 `3.0` 和 `4.0`。取而代之的是，它们会在计算时各自产生 3.0 和 4.0 的节点。要实际的计算节点，我们必须使用 **会话（session）** 来运行计算图。会话封装了 TensorFlow 运行时的控制和状态。
 
-下面的代码创建了一个 `Session` 对象，然后调用其 `run` 方法运行足够的数据流图来评估 `node1` 和 `node2`。利用会话机制运行数据流图的代码如下：
+下面的代码创建了一个 `Session` 对象，然后调用其 `run` 方法运行足够的计算图来计算 `node1` 和 `node2`。使用一个会话来运行计算图的代码如下：
 
 ```python
 sess = tf.Session()
@@ -85,11 +85,11 @@ node3: Tensor("Add:0", shape=(), dtype=float32)
 sess.run(node3): 7.0
 ```
 
-TensorFlow 提供了一个叫做 TensorBoard 的实用程序，通过它可以显示数据流图的图片。下面的截图显示了 TensorBoard 如何可视化数据流图：
+TensorFlow 提供了一个叫做 TensorBoard 的实用程序，通过它可以显示计算图的图片。下面的截图显示了 TensorBoard 如何可视化计算图：
 
 ![TensorBoard screenshot](https://www.tensorflow.org/images/getting_started_add.png)
 
-事实上，这样的图并不是很有趣，因为它总是产生一个常量结果。一个图可以被参量化成接受外部输入，称之为**占位符**。一个**占位符**将保证在后面提供一个值。
+事实上，这样的图并不是很有趣，因为它总是产生一个常量结果。一个图可以被参量化成接受外部输入，称之为**占位符**。一个**占位符**随后会被输入中的一个值所替代。
 
 ```python
 a = tf.placeholder(tf.float32)
@@ -97,7 +97,7 @@ b = tf.placeholder(tf.float32)
 adder_node = a + b  # 加号 `+` 提供了一个进行 tf.add(a, b) 的简单方法
 ```
 
-前面三行有点像一个函数或者 lambda 表达式，在其中我们定义了两个输入参量（a 和 b），然后对它们进行操作。我们可以通过使用 feed_dict [调用方法](https://www.tensorflow.org/api_docs/python/tf/Session#run)来对数据流图进行多个输入，为这些占位符提供具体的值来进行数据流图的评估。
+前面三行有点像一个函数或者 lambda 表达式，在其中我们定义了两个输入参量（a 和 b），然后对它们进行操作。我们可以通过使用 [run 方法](https://www.tensorflow.org/api_docs/python/tf/Session#run)的参数 feed_dict 来对计算图进行多值输入，为这些占位符提供具体的值来进行计算图的求值。
 
 ```python
 print(sess.run(adder_node, {a: 3, b: 4.5}))
@@ -114,7 +114,7 @@ print(sess.run(adder_node, {a: [1, 3], b: [2, 4]}))
 
 ![TensorBoard screenshot](https://www.tensorflow.org/images/getting_started_adder.png)
 
-我们可以通过添加另外的操作来让数据流图更加复杂。例如：
+我们可以通过添加另外的操作来让计算图更加复杂。例如：
 
 ```python
 add_and_triple = adder_node * 3.
@@ -125,11 +125,11 @@ print(sess.run(add_and_triple, {a: 3, b: 4.5}))
 22.5
 ```
 
-前面的数据流图在 TensorBoard 会像如下所示：
+前面的计算图在 TensorBoard 会像如下所示：
 
 ![TensorBoard screenshot](https://www.tensorflow.org/images/getting_started_triple.png)
 
-在机器学习里，我们通常会想要一个可以接受任意输入的模型，比如上面那一个。为了让模型可训练，我们需要对数据流图进行修改，以便于达到相同输入下有新的输出结果。**变量**允许我们向数据流图中加入可训练的参数。他们通过类型构造和初始值方法如下：
+在机器学习里，我们通常会想要一个可以接受任意输入的模型，比如上面那一个。为了让模型可训练，我们需要对计算图进行修改，以便于达到相同输入下有新的输出结果。**变量**允许我们向计算图中加入可训练的参数。它们可以通过初始值和一个类型进行构造，方法如下: ：
 
 
 ```python
@@ -139,16 +139,16 @@ x = tf.placeholder(tf.float32)
 linear_model = W*x + b
 ```
 
-常量使用 `tf.constant` 进行初始化，其值永远不会改变。相比之下，使用 `tf.Variable` 并不会初始化变量。要在 TensorFlow 程序中初始化所有变量，你必须显示的调用下面的特殊操作：
+常量使用 `tf.constant` 进行初始化，其值永远不会改变。相比之下，使用 `tf.Variable` 并不会初始化变量。要在 TensorFlow 程序中初始化所有变量，你必须显示的调用下面的特定操作：
 
 ```python
 init = tf.global_variables_initializer()
 sess.run(init)
 ```
-重要的是实现 `init` 来处理 TensorFlow 的子图从而为全局变量进行初始化。直到我们调用 `sess.run`，变量才会被初始化。
+重要的是要认识到 `init` 是一个可以初始化所有全局变量的 TensorFlow 子图的一个句柄。直到我们调用 `sess.run`，变量才会被初始化。
 
 
-既然 `x` 是占位符，我们可以利用 `linear_model` 来为一些值 `x` 进行评估，如下：
+既然 `x` 是占位符，我们可以利用线性模型（`linear_model`）同时对 `x` 的多个值进行计算，如下：
 
 ```python
 print(sess.run(linear_model, {x: [1, 2, 3, 4]}))
@@ -160,7 +160,7 @@ print(sess.run(linear_model, {x: [1, 2, 3, 4]}))
 
 我们已经创建了一个模型，但是我们不知道它的性能。为了在训练数据集上评估模型，我们需要一个 `y` 占位符来提供所需的值，然后我们需要编写一个损耗函数。
 
-损耗函数用于测量当前模型和提供的数据集之间的距离。我们将使用线性回归的标准损耗模型，它会将当前模型和提供的数据集之间的误差平方求和。`linear_model - y` 创建一个向量，其中每个元素都是对应实例的误差值。我们调用 `tf.square` 来平方这些误差，然后我们将所有平方后的误差进行求和，以此来创建一个单量，并使用 `tf.reduce_sum` 来将所有实例的误差抽象出来：
+损耗函数用于衡量当前模型和提供的数据集之间的偏离程度。我们将使用线性回归的标准损耗模型，它会将当前模型和提供的数据集之间的误差平方求和。`linear_model - y` 创建一个向量，其中每个元素都是对应实例的误差值。我们调用 `tf.square` 来平方这些误差，然后我们将所有平方后的误差进行求和，以此来创建一个单量，并使用 `tf.reduce_sum` 来将所有实例的误差提取出来：
 
 ```python
 y = tf.placeholder(tf.float32)
@@ -173,7 +173,7 @@ print(sess.run(loss, {x: [1, 2, 3, 4], y: [0, -1, -2, -3]}))
 23.66
 ```
 
-我们可以手动重新分配 `W` 和 `b` 的值将其变为 -1 到 1 中的最优值。变量可以初始化为由 `tf.Variable` 所提供的值，但也可以使用例如 `tf.assign` 操作来进行改变。例如，`W=-1`和 `b=1` 是我们模型的优化参数。我们可以相应的改变 `W` 和 `b`: 
+我们可以通过手动将 `W` 和 `b` 的值重新赋值为最优的 -1 和 1 来改善损耗函数的结果。变量可以初始化为由 `tf.Variable` 所提供的值，但也可以使用例如 `tf.assign` 操作来进行改变。例如，`W=-1`和 `b=1` 是我们模型的最优参数。我们可以相应的改变 `W` 和 `b`: 
 
 ```python
 fixW = tf.assign(W, [-1.])
@@ -190,7 +190,7 @@ print(sess.run(loss, {x: [1, 2, 3, 4], y: [0, -1, -2, -3]}))
 
 ## tf.train API
 
-对于机器学习完整的讨论已经超出了本教程的范围。然而，TensorFlow 提供了**优化器**来缓慢地更改每个变量，从而最大程度的降低损耗函数。最简单的优化器就是**梯度下降**。它根据相对于变量的损耗函数导数的大小来修改每个变量。通常来说，手动计算函数导数是很乏味且易出错的。因此，TensorFlow 可以使用 `tf.gradients` 来自动的生成仅给出了模型描述的导数。为了方便起见，优化器通常会帮助用户做这样的操作。例如，
+对于机器学习完整的讨论已经超出了本教程的范围。然而，TensorFlow 提供了**优化器**来缓慢地更改每个变量，从而最大程度的降低损耗函数。最简单的优化器就是**梯度下降**。它根据相对于变量的损耗函数导数的大小来修改每个变量。通常来说，手动计算函数导数是很乏味且易出错的。因此，TensorFlow 可以使用 `tf.gradients` 来自动的生成仅给出了模型描述的导数。为了方便起见，优化器通常会帮助用户做这样的操作。例如，
 
 ```python
 optimizer = tf.train.GradientDescentOptimizer(0.01)
@@ -242,7 +242,7 @@ sess.run(init) # reset values to wrong
 for i in range(1000):
   sess.run(train, {x: x_train, y: y_train})
 
-# 评估训练准确度
+# 计算训练的准确度
 curr_W, curr_b, curr_loss = sess.run([W, b, loss], {x: x_train, y: y_train})
 print("W: %s b: %s loss: %s"%(curr_W, curr_b, curr_loss))
 ```
@@ -251,9 +251,9 @@ print("W: %s b: %s loss: %s"%(curr_W, curr_b, curr_loss))
 W: [-0.9999969] b: [ 0.99999082] loss: 5.69997e-11
 ```
 
-可以注意到损耗非常小（接近于零）。如果你运行这段代码，你的损耗可能不会和上述损耗结果一模一样，这是因为模型是由随机值来初始化的。
+注意，损耗函数的值非常小（接近于零）。如果你运行这段代码，你的损耗可能不会和上述损耗结果一模一样，这是因为模型是由随机值来初始化的。
 
-在 TensorBoard 中这段完整代码可视化结果为：
+这段更复杂的代码依然可以在 TensorBoard 中可视化：：
 ![TensorBoard final model visualization](https://www.tensorflow.org/images/getting_started_final.png)
 
 ## `tf.estimator`
@@ -271,21 +271,21 @@ tf.estimator 定义了许多常见的模型。
 注意看 `tf.estimator` 使得线性回归程序变得更简单：
 
 ```python
-# Numpy 经常被用来载入、操纵和预处理数据集
+# NumPy 经常被用来载入、操纵和预处理数据集
 import numpy as np
 import tensorflow as tf
 
 # 声明一系列特征。这里我们只有一组纯数字特征
-# 还有许多其他类型的列，它们更加复杂和有用
+# 还有许多其他类型的更复杂更有用的 column
 feature_columns = [tf.feature_column.numeric_column("x", shape=[1])]
 
-# 优化器从前到后是调用训练（拟合）和评估（推断）方法
+# 估算器可以调用训练（拟合）和评估（推理）方法的前端
 # 这里有许多预定义的函数类型，比如线性回归、线性分类
 # 并且也包含许多神经网络分类器和回归器
 # 下面的代码提供了一个线性回归的优化器
 estimator = tf.estimator.LinearRegressor(feature_columns=feature_columns)
 
-# TensorFlow 提供了许多有用的方法来读取和设置数据集
+# TensorFlow 提供了许多 `helper` 方法来读取和设置数据集
 # 这里我们有两组数据集：一组是训练集，另一组是测试集用于评估
 # 我们需要告诉函数我们想要设置多少组数据（num_epochs），并且每组数据的大小应该是多少
 # 
@@ -315,19 +315,19 @@ print("eval metrics: %r"% eval_metrics)
 train metrics: {'average_loss': 1.4833182e-08, 'global_step': 1000, 'loss': 5.9332727e-08}
 eval metrics: {'average_loss': 0.0025353201, 'global_step': 1000, 'loss': 0.01014128}
 ```
-可以注意到，我们重复多次运算的数据产生了更高的损耗，但是它仍然接近于零。这就说明我们的学习比较适合。
+注意到我们的评估数据集有更高的损耗值，但是他仍然接近于零。这就说明我们的学习比较适合。
 
-### 一种常见模型
+### 自定义模型
 
-`tf.estimator` 并不会在它预定义的模型中限制你。假设我们想创建一个并没有在 TensorFlow 中创建的常见模型。我们仍然可以保留 `tf.estimator` 关于数据集、反馈、训练等高级的抽象。通过举例，我们将会展示如何利用我们关于低阶 TensorFlow API 知识来创建一个和 `LinearRegressor` 相同的模型。
+`tf.estimator` 并不会把你限制在它预定义的模型中。假设我们要创建一个未内建于 TensorFlow 的自定义模型。我们仍然能够使用 `tf.estimator` 中关于数据集、数据输入、训练等的高层抽象。为了演示这一切，我们将会展示如何利用低阶 TensorFlow API 的知识来实现一个我们自己的 `LinearRegressor` 等价模型。
 
-创建一个使用 `tf.estimator` 的常见模型，我们需要使用 `tf.estimator.Estimator`。`tf.estimator.LinearRegressor` 实际上是 `tf.estimator.Estimator` 的子类。但是为了替代子类 `Estimator`，我们简单的通过一个 `model_fn` 函数来提供 `Estimator` ，从而来告诉 `tf.estimator` 如何进行评估预测、训练步骤和损耗计算。代码如下：
+定义一个和 `tf.estimator` 协同工作的自定义模型，我们需要使用 `tf.estimator.Estimator`。`tf.estimator.LinearRegressor` 实际上是 `tf.estimator.Estimator` 的子类。相比于实现一个 `Estimator` 的子类，我们只简单地通过给 `Estimator` 提供一个 `model_fn` 函数来告诉  `tf.estimator` 如何进行预测、训练和损耗函数的计算。代码如下：
 
 ```python
 import numpy as np
 import tensorflow as tf
 
-# 声明一系列特征，这里我们只有实值特征
+# 声明特征列表，这里我们只有实值特征
 def model_fn(features, labels, mode):
   # 创建线性模型和预测值
   W = tf.get_variable("W", [1], dtype=tf.float64)
@@ -340,7 +340,7 @@ def model_fn(features, labels, mode):
   optimizer = tf.train.GradientDescentOptimizer(0.01)
   train = tf.group(optimizer.minimize(loss),
                    tf.assign_add(global_step, 1))
-  # EstimatorSpec 连接了我们所创建的相关函数的子图
+  # EstimatorSpec 连接我们所创建的子图到相关的函数
   # 
   return tf.estimator.EstimatorSpec(
       mode=mode,
@@ -375,7 +375,7 @@ train metrics: {'loss': 1.227995e-11, 'global_step': 1000}
 eval metrics: {'loss': 0.01010036, 'global_step': 1000}
 ```
 
-可以注意到，自定义 `model_fn()` 函数的结果和我们利用低阶 API 进行手动训练循环的结果十分相似。
+可以注意到，这个自定义 `model_fn()` 函数的代码和我们利用低阶 API 进行手动训练的模型（model）代码是多么地相似。
 
 ## 下一阶段
 
