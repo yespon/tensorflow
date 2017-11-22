@@ -282,24 +282,25 @@ $ <b>bazel build --config=opt //tensorflow/tools/pip_package:build_pip_package</
 
 
 支持 GPU 的情况下，调用下面的命令建立一个TensorFlow pip 包：
-To build a pip package for TensorFlow with GPU support,
-invoke the following command:
 
 <pre>$ <b>bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:build_pip_package</b> </pre>
 
-**注意需要在 gcc 5 或者更高版本上:** the binary pip packages available on the
-TensorFlow website are built with gcc 4, which uses the older ABI. To
-make your build compatible with the older ABI, you need to add
-`--cxxopt="-D_GLIBCXX_USE_CXX11_ABI=0"` to your `bazel build` command.
-ABI compatibility allows custom ops built against the TensorFlow pip package
-to continue to work against your built package.
+**注意需要在 gcc 5 或者更高版本上:** 
+这个二进制 pip 包适用在用 gcc 4 构建的 TensorFlow 网站，这个二进制包使用的是老的 ABI（应用程序二进制接口），为了能兼容老的 ABI，你需要在`bazel build`命令后添加`--cxxopt="-D_GLIBCXX_USE_CXX11_ABI=0"`。
+ABI 兼容性允许针对TensorFlow pip包进行自定义操作，从而使你构建的包能继续运行。
 
-<b>Tip:</b> By default, building TensorFlow from sources consumes
-a lot of RAM.  If RAM is an issue on your system, you may limit RAM usage
-by specifying <code>--local_resources 2048,.5,1.0</code> while
-invoking `bazel`.
 
-The <code>bazel build</code> command builds a script named
+<b>提示:</b> 
+通常情况下，源代码构建 TensorFlow 会占用大量内存，如果你的系统内存紧张，
+可以在调用`bazel`时指明 <code>--local_resources 2048,.5,1.0</code> 限制使用内存范围
+By default, building TensorFlow from sources consumes 
+
+
+
+ <code>bazel build</code> 命令执行一个叫
+ `build_pip_package`
+ 的脚本，执行这个脚本
+ command builds a script named
 `build_pip_package`.  Running this script as follows will build
 a `.whl` file within the `/tmp/tensorflow_pkg` directory:
 
