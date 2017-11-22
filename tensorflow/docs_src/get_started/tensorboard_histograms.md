@@ -1,13 +1,13 @@
-# TensorBoard 直方图仪表板
+# TensorBoard 直方图版面
 
-TensorBoard 直方图仪表板其实是在 TensorFlow 图表上显示 `Tensor` 的分布是如何随时间变化而变化。通过大量展示在不同时间的直方图，tensor 的变化得以视像化。
+TensorBoard 直方图版面其实是在 TensorFlow 图表上显示 `Tensor` 的分布是如何随时间变化而变化。通过大量展示在不同时间的直方图，tensor 的变化得以视像化。
 
 ## 一个简单的例子
 
 一起看看一个简单例子：一个平均值随时间变化而变化的正态分布的变量
-TensorFlow 有一个单元叫[`tf.random_normal`](https://www.tensorflow.org/api_docs/python/tf/random_normal)非常适用于这类问题。由于TensorBoard常常碰到此类情形，我们  用一个概览的单元来处理数据，也就是['tf.summary.histogram'](https://www.tensorflow.org/api_docs/python/tf/summary/histogram)。如果想了解此概览的运行机制，请看[TensorBoard 教程](https://www.tensorflow.org/get_started/summaries_and_tensorboard)。
+TensorFlow 有一个单元[`tf.random_normal`](https://www.tensorflow.org/api_docs/python/tf/random_normal)非常适用于这类问题。通常在 TensorFlow 里我们会先用一个['tf.summary.histogram'](https://www.tensorflow.org/api_docs/python/tf/summary/histogram)单元来总结数据。如果想了解此总结单元的运行机制，请看 [TensorBoard 教程](https://www.tensorflow.org/get_started/summaries_and_tensorboard)。
 
-这里是段能生成直方图概览的代码，这类概览含有正态分布数据而且其平均值随时间增加而增加。
+这里是段能生成直方图总结的代码，这类总结含有正态分布数据而且其平均值随时间增加而增加。
 
 ```python
 import tensorflow as tf
@@ -16,16 +16,16 @@ k = tf.placeholder(tf.float32)
 
 # 生成一个平均值会变化的正态分布
 mean_moving_normal = tf.random_normal(shape=[1000], mean=(5*k), stddev=1)
-# 用直方图概览记录这个正态分布
+# 用直方图总结记录这个正态分布
 tf.summary.histogram("normal/moving_mean", mean_moving_normal)
 
-# 建立 session 还有概览写入器
+# 建立 session 还有总结写入器
 sess = tf.Session()
 writer = tf.summary.FileWriter("/tmp/histogram_example")
 
 summaries = tf.summary.merge_all()
 
-# 建立一个循环并把概览写入硬盘
+# 建立一个循环并把总结写入硬盘
 N = 400
 for step in range(N):
   k_val = step/float(N)
@@ -40,7 +40,7 @@ for step in range(N):
 tensorboard --logdir=/tmp/histogram_example
 ```
 
-TensorBoard 运行的时候用 Chrome 或者 Firefox 加载然后打开直方图仪表板，就能看到用直方图图像化了的正态分布数据。
+TensorBoard 运行的时候用 Chrome 或者 Firefox 加载然后打开直方图版面，就能看到用直方图图像化了的正态分布数据。
 
 ![](https://www.tensorflow.org/images/tensorboard/histogram_dashboard/1_moving_mean.png)
 
@@ -51,13 +51,13 @@ TensorBoard 运行的时候用 Chrome 或者 Firefox 加载然后打开直方图
 TensorFlow 用一个类似的方法去生成区间，但不同的是，它不只生成几个区间，而是为大而分散的数据集生成数千个区间。取而代之的是[指数分布的区间，大部分靠近0，相对少部分靠近大的数字。](https://github.com/tensorflow/tensorflow/blob/c8b59c046895fa5b6d79f73e0b5817330fcfbfc1/tensorflow/core/lib/histogram/histogram.cc#L28)
 然而，视像化指数分布的区间比较棘手；如果高度用来表示个数，宽一点的区间面积就较大，即使其包含的元素个数一样。相反如果用面积来表示个数，就无法对高度做对比。因而，TensorFlow 的直方图对数据作[重新取样](https://github.com/tensorflow/tensorflow/blob/17c47804b86e340203d451125a721310033710f1/tensorflow/tensorboard/components/tf_backend/backend.ts#L400)并分配到等宽的区间。这也不是完美的方案。
 
-直方图视化器里面的每一片层代表一个直方图。这些片层根据步骤来整理：旧的片层（例如步骤0）会放得比较“靠后”而且颜色较深，而较新的片层（例如步骤400）放得靠前而且颜色较浅。右方的 y 轴代表步骤的号码。
+直方图视化器里面的每一截面代表一个直方图。这些截面根据步骤来整理：旧的截面（例如步骤0）会放得比较“靠后”而且颜色较深，而较新的截面（例如步骤400）放得靠前而且颜色较浅。右方的 y 轴代表步骤的号码。
 
 你可以把滑鼠移到直方图赏查看更多具体信息。例如从下方的图表我门看到在时点 176 的时候有个以 2.25 为中心的区间有177个元素在里面。
 
 ![](https://www.tensorflow.org/images/tensorboard/histogram_dashboard/2_moving_mean_tooltip.png)
 
-此外，你或许要注意以下直方图片层不一定在单位时间或者个数上均匀分布。这是因为 TensorBoard 用[水塘抽样](https://en.wikipedia.org/wiki/Reservoir_sampling)来保留所有直方图的子集以达到节省内存的目的。水塘抽样保证每个样本被抽到的可能性是一样的，但因为这是随机化的算法，抽到的样品不再偶数 steps 上。
+此外，你或许要注意以下直方图截面不一定在单位时间或者个数上均匀分布。这是因为 TensorBoard 用[水塘抽样](https://en.wikipedia.org/wiki/Reservoir_sampling)来保留所有直方图的子集以达到节省内存的目的。水塘抽样保证每个样本被抽到的可能性是一样的，但因为这是随机化的算法，抽到的样品不再偶数 steps 上。
 
 ## 覆盖模式
 
@@ -65,10 +65,10 @@ TensorFlow 用一个类似的方法去生成区间，但不同的是，它不只
 
 ![](https://www.tensorflow.org/images/tensorboard/histogram_dashboard/3_overlay_offset.png)
 
-其实就是在“并列模式”里，把视觉效果转45度角使每个直方图片层不在时间轴上分开而都在相同 y 轴上显示。
+其实就是在“并列模式”里，把视觉效果转45度角使每个直方图截面不在时间轴上分开而都在相同 y 轴上显示。
 
 ![](https://www.tensorflow.org/images/tensorboard/histogram_dashboard/4_overlay.png)
-现在每条线代表独立片层，而且 y 轴显示每个篮子里物品的个数。深颜色的线代表较早的步骤，浅颜色的线代表比较新的步骤。同样，你可以把滑鼠移到图表上看更多信息。
+现在每条线代表独立截面，而且 y 轴显示每个篮子里物品的个数。深颜色的线代表较早的步骤，浅颜色的线代表比较新的步骤。同样，你可以把滑鼠移到图表上看更多信息。
 
 ![](https://www.tensorflow.org/images/tensorboard/histogram_dashboard/5_overlay_tooltips.png)
 
@@ -76,7 +76,7 @@ TensorFlow 用一个类似的方法去生成区间，但不同的是，它不只
 
 ## 多模分布
 
-直方图仪表板很善于视像化多模分布。如果我们通过连结两个不同的正态分布来建立一个双模分布，其代码如下：
+直方图版面很善于视像化多模分布。如果我们通过连结两个不同的正态分布来建立一个双模分布，其代码如下：
 
 ```python
 import tensorflow as tf
@@ -85,7 +85,7 @@ k = tf.placeholder(tf.float32)
 
 # 生成一个平均值会变化的正态分布
 mean_moving_normal = tf.random_normal(shape=[1000], mean=(5*k), stddev=1)
-# 用直方图概览记录这个正态分布
+# 用直方图总结记录这个正态分布
 tf.summary.histogram("normal/moving_mean", mean_moving_normal)
 
 # 生成一个方差会变小的正态分布
@@ -95,16 +95,16 @@ tf.summary.histogram("normal/shrinking_variance", variance_shrinking_normal)
 
 # 让我们整合两个分布到一组数据
 normal_combined = tf.concat([mean_moving_normal, variance_shrinking_normal], 0)
-# 我们加上另一个直方图概览纪录这个整合的分布
+# 我们加上另一个直方图总结纪录这个整合的分布
 tf.summary.histogram("normal/bimodal", normal_combined)
 
 summaries = tf.summary.merge_all()
 
-# 建立 session 还有概览写入器
+# 建立 session 还有总结写入器
 sess = tf.Session()
 writer = tf.summary.FileWriter("/tmp/histogram_example")
 
-# 建立一个循环并把概览写入硬盘
+# 建立一个循环并把总结写入硬盘
 N = 400
 for step in range(N):
   k_val = step/float(N)
@@ -112,15 +112,15 @@ for step in range(N):
   writer.add_summary(summ, global_step=step)
 ```
 
-你已经记得我们上面例子的“变化均值”的正态分布。现在我们还要一个“缩小方差”的分布。同时显示的话如下：
+你已经记得我们上面例子的“变化均值”的正态分布。现在我们还要一个“缩小方差”的分布。整合一起的效果图如下：
 ![](https://www.tensorflow.org/images/tensorboard/histogram_dashboard/6_two_distributions.png)
 
-当我们连结他们，我们清楚看到分岔的双模结构图。
+合并后我们清楚看到分岔的双模结构图。
 ![](https://www.tensorflow.org/images/tensorboard/histogram_dashboard/7_bimodal.png)
 
 ## 更多分布
 
-我们试试生成并图像化更多分布,然后把他们整合到一个图中。这里是我们会用到的代码：
+我们再试试生成并图像化更多不同的分布,然后把他们整合到一个图中。这里是我们会用到的代码：
 
 ```python
 import tensorflow as tf
@@ -129,7 +129,7 @@ k = tf.placeholder(tf.float32)
 
 # 生成一个平均值会变化的正态分布
 mean_moving_normal = tf.random_normal(shape=[1000], mean=(5*k), stddev=1)
-# 用直方图概览记录这个正态分布
+# 用直方图总结记录这个正态分布
 tf.summary.histogram("normal/moving_mean", mean_moving_normal)
 
 # 生成一个方差会变小的正态分布
@@ -139,7 +139,7 @@ tf.summary.histogram("normal/shrinking_variance", variance_shrinking_normal)
 
 # 让我们整合两个分布到一组数据
 normal_combined = tf.concat([mean_moving_normal, variance_shrinking_normal], 0)
-# 我们加上另一个直方图概览纪录这个整合的分布
+# 我们加上另一个直方图总结纪录这个整合的分布
 tf.summary.histogram("normal/bimodal", normal_combined)
 
 # 添加一个伽马分布
@@ -162,11 +162,11 @@ tf.summary.histogram("all_combined", all_combined)
 
 summaries = tf.summary.merge_all()
 
-# 建立 session 还有概览写入器
+# 建立 session 还有总结写入器
 sess = tf.Session()
 writer = tf.summary.FileWriter("/tmp/histogram_example")
 
-# 建立一个循环并把概览写入硬盘
+# 建立一个循环并把总结写入硬盘
 N = 400
 for step in range(N):
   k_val = step/float(N)
@@ -183,7 +183,7 @@ for step in range(N):
 ![](https://www.tensorflow.org/images/tensorboard/histogram_dashboard/10_poisson.png)
 泊松分布的定义基于整数。因此，所有得出的值都是整数。直方图的压缩把数据移到浮点区间里，导致视觉上看到的是小突起而不是完美的高峰。
 
-### 概览
+### 总结
 最后，我们可以把数据连接到一个形状奇特的曲线图。
 
 ![](https://www.tensorflow.org/images/tensorboard/histogram_dashboard/11_all_combined.png)
