@@ -299,33 +299,31 @@ By default, building TensorFlow from sources consumes
 
  <code>bazel build</code> 命令执行一个叫
  `build_pip_package`
- 的脚本，执行这个脚本
- command builds a script named
-`build_pip_package`.  Running this script as follows will build
-a `.whl` file within the `/tmp/tensorflow_pkg` directory:
+ 的脚本，执行这个脚本将会在 `/tmp/tensorflow_pkg` 目录下构建一个 `.whl` 文件。
+ 
 
 <pre>
 $ <b>bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg</b>
 </pre>
 
 
-## Install the pip package
+## 安装 pip 包
 
-Invoke `pip install` to install that pip package.
-The filename of the `.whl` file depends on your platform.
-For example, the following command will install the pip package
+调用 `pip install` 安装 pip 包。
+`.whl`的文件名与你的平台有关，例如下面的命令将会在 Linux 上安装 TensorFlow 1.4rc0。
 
-for TensorFlow 1.4.0rc0 on Linux:
 
 <pre>
 $ <b>sudo pip install /tmp/tensorflow_pkg/tensorflow-1.4.0rc0-py2-none-any.whl</b>
 </pre>
 
-## Validate your installation
+## 验证安装是否成功 
 
-Validate your TensorFlow installation by doing the following:
+按照以下说明验证 TensorFlow 是否安装成功：
 
-Start a terminal.
+启动终端。
+
+
 
 Change directory (`cd`) to any directory on your system other than the
 `tensorflow` subdirectory from which you invoked the `configure` command.
