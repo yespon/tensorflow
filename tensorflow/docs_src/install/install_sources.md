@@ -61,14 +61,8 @@ $ <b>git checkout</b> <i>Branch</i> # 这里 <i>Branch</i> 就是创建的分�
 在 Linux 上构建 TensorFlow 之前， 你需要在你的系统上安装以下构建工具：
 
   * bazel
-  * TensorFlow Python 依赖
-  * 可选, 为了支持 GPU 而安装的 NVIDIA 软件包。
-
-
-  * bazel
-  * TensorFlow Python dependencies
-  * optionally, NVIDIA packages to support TensorFlow for GPU.
-### 安装 Bazel
+  * TensorFlow Python 依赖
+  * 可选, 为了支持 GPU 而安装的 NVIDIA 软件包。
 
 如果系统之前未安装 Bazel，需要按照以下说明安装
 [安装 Bazel](https://bazel.build/versions/master/docs/install.html).
