@@ -72,10 +72,12 @@ $ <b>git checkout</b> <i>Branch</i> # 这里 <i>Branch</i> 就是创建的分�
 
 安装 TensorFlow之前, 你必须安装以下安装包:
 
-  * `numpy`, which is a numerical processing package that TensorFlow requires
   * `numpy`, 一个 TensorFlow 需要安装的用于数值处理的包
+  
   * `dev`, 用于添加 Python 扩展包
+  
   * `pip`, 用于安装和管理 Python 包
+  
   * `wheel`, 能够让你管理 Python 的 wheel 格式的压缩包
 
 执行以下命令，安装 Python 2.7 
