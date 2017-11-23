@@ -12,17 +12,17 @@
 我们官方不支持在 Windows 上构建 TensorFlow，不过，如果你不介意参考
 [Bazel on Windows](https://bazel.build/versions/master/docs/windows.html)
 或者
-[TensorFlow CMake build](https://github.com/tensorflow/tensorflow/tree/r0.12/tensorflow/contrib/cmake).
+[TensorFlow CMake build](https://github.com/tensorflow/tensorflow/tree/r0.12/tensorflow/contrib/cmake)
 的经验，你可以尝试在 Windows 上搭建 TensorFlow。
 
 ## 决定安装哪种类型的 TensorFlow 
 
 你需要从以下多种类型的 TensorFlow 中选择一个安装并构建：
-* **TensorFlow 仅支持 CPU**. 如果你的系统不支持 NVIDIVA 的 GPU，需要安装这个版本。
+* **仅支持 CPU 的TensorFlow **. 如果你的系统不支持 NVIDIVA 的 GPU，需要安装这个版本。
   值得注意的是，这个版本的 TensorFlow 通常容易安装构建，所以即使你有 NVIDIA 的 GPU，我们仍然推荐你先安装这个版本。
   
-* **TensorFlow 支持 GPU**. TensorFlow 程序在 GPU 上运行会明显比在 CPU 上快。
-  因此，如果你的系统有 NVIDIA 的 GPU，同时你需要运行对性能要求苛刻的程序时，你就需要安装这个版本的 TensorFlow，
+* **支持 GPU 的 TensorFlow **. TensorFlow 程序在 GPU 上运行会明显比在 CPU 上快。
+  因此，如果你的系统有 NVIDIA 的 GPU，同时你需要运行对性能要求苛刻的程序时，你就需要安装这个版本的 TensorFlow，
   不仅需要 NVIDIA 的 GPU，你的系统还需要满足 NVIDIA 软件的要求，具体描述参考以下文档：
 
   * @{$install_linux#NVIDIARequirements$Installing TensorFlow on Ubuntu}
