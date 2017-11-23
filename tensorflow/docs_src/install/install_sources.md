@@ -322,17 +322,11 @@ $ <b>sudo pip install /tmp/tensorflow_pkg/tensorflow-1.4.0rc0-py2-none-any.whl</
 按照以下说明验证 TensorFlow 是否安装成功：
 
 启动终端。
-
-
-
-Change directory (`cd`) to any directory on your system other than the
-`tensorflow` subdirectory from which you invoked the `configure` command.
-
-Invoke python:
-
+通过 `cd` 改变当前所在目录，在除之前调用 `configure` 命令的 `tensorflow` 子目录之外的任意文件夹下执行。
+调用 python：
 <pre>$ <b>python</b></pre>
 
-Enter the following short program inside the python interactive shell:
+在python交互式shell中输入以下代码：
 
 ```python
 # Python
@@ -342,18 +336,16 @@ sess = tf.Session()
 print(sess.run(hello))
 ```
 
-If the system outputs the following, then you are ready to begin writing
-TensorFlow programs:
+如果系统输出以下内容，你就可以开始编写 TensorFlow 程序了：
 
 <pre>Hello, TensorFlow!</pre>
 
-If you are new to TensorFlow, see @{$get_started/get_started$Getting Started with
+如果你是 TensorFlow 新手参考 @{$get_started/get_started$Getting Started with
 TensorFlow}.
 
-If the system outputs an error message instead of a greeting, see [Common
-installation problems](#common_installation_problems).
+如果系统输出错误信息, 参考 [常见安装问题](#common_installation_problems).
 
-## Common installation problems
+## 常见安装问题
 
 The installation problems you encounter typically depend on the
 operating system.  See the "Common installation problems" section
