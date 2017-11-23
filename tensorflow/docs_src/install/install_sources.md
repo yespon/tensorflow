@@ -1,9 +1,9 @@
 # 通过源码安装 TensorFlow
 
 本文将解释如何编译 TensorFlow 源代码为二进制文件，并通过二进制文件安装 TensorFlow，
-需要注意的是，我们已经为 Linuc，Mac 和 Windows 系统提供经过测试良好，预构建好的二进制 Tensorflow 文件，
+需要注意的是，我们已经为 Linuc，Mac 和 Windows 系统用户提供经过测试良好，预构建好的二进制 Tensorflow 文件，
 除此之外还提供 TensorFlow 的 [docker 镜像](https://hub.docker.com/r/tensorflow/tensorflow/)。
-所以建议不要自己尝试构建二进制 TensorFlow 代码，除非你能熟练通过源码构建复杂程序包，并且可以解决一些在文档中没有提到的不可预测的情况。
+所以除非你能熟练通过源码构建复杂程序包，并且可以解决一些在文档中没有提到的不可预测的情况，建议不要自己尝试构建二进制 TensorFlow 代码。
 
 如果上一段话没有吓退你，很高兴。这份指南将解释如何在以下操作系统上构建 TensorFlow：
 *   Ubuntu
@@ -13,12 +13,12 @@
 [Bazel on Windows](https://bazel.build/versions/master/docs/windows.html)
 或者
 [TensorFlow CMake build](https://github.com/tensorflow/tensorflow/tree/r0.12/tensorflow/contrib/cmake).
-的经验，你可以尝试在 Windows 上搭建 TensorFlow 
+的经验，你可以尝试在 Windows 上搭建 TensorFlow。
 
 ## 决定安装哪种类型的 TensorFlow 
 
 你需要从以下多种类型的 TensorFlow 中选择一个安装并构建：
-* **TensorFlow 仅支持 CPU**. 如果你的系统不支持 NVIDIVA 的 GPU，需要安装这个版本. 
+* **TensorFlow 仅支持 CPU**. 如果你的系统不支持 NVIDIVA 的 GPU，需要安装这个版本。
   值得注意的是，这个版本的 TensorFlow 通常容易安装构建，所以即使你有 NVIDIA 的 GPU，我们仍然推荐你先安装这个版本。
   
 * **TensorFlow 支持 GPU**. TensorFlow 程序在 GPU 上运行会明显比在 CPU 上快。
