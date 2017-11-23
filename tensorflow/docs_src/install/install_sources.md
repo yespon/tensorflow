@@ -62,9 +62,12 @@ $ <b>git checkout</b> <i>Branch</i> # 这里 <i>Branch</i> 就是创建的分�
 
   * bazel
   * TensorFlow Python 依赖
-  * 可选, 为了支持 GPU 而安装的 NVIDIA 软件包
+  * 可选, 为了支持 GPU 而安装的 NVIDIA 软件包。
 
 
+  * bazel
+  * TensorFlow Python dependencies
+  * optionally, NVIDIA packages to support TensorFlow for GPU.
 ### 安装 Bazel
 
 如果系统之前未安装 Bazel，需要按照以下说明安装
