@@ -102,18 +102,19 @@ $ <b>sudo apt-get install python3-numpy python3-dev python3-pip python3-wheel</b
 
 必须在你的系统中安装以下 NVIDIA <i>软件</i>：
 
-  * NVIDIA's Cuda Toolkit (>= 7.0). 推荐 8.0版本.
+  * NVIDIA's Cuda Toolkit (>= 7.0). 推荐 8.0版本.
     详细可参考
     [NVIDIA 文档](http://docs.nvidia.com/cuda/cuda-installation-guide-linux/#axzz4VZnqTJ2A).
     确保按照文档要求添加 Cuda 相对路径 “LD_LIBRARY_PATH” 到环境变量。
-    
-  * 与 NVIDIA 的 Cuda 工具包匹配的驱动程序
-  * cuDNN (>= v3). 推荐 5.1版本. 细节参考
+  * 与 NVIDIA 的 Cuda 工具包匹配的驱动程序
+  * cuDNN (>= v3). 推荐 5.1版本. 细节参考
     [NVIDIA 文档](https://developer.nvidia.com/cudnn),
     注意将路径添加到 `LD_LIBRARY_PATH` 环境变量。
-    
-    最后, 你必须安装 与 CUDA 工具包匹配的 `libcupti`>= 8.0
+    
+    
+最后,你还必须安装Cuda工具包的`libcupti> = 8.0`。
 
+[NVIDIA's documentation](http://docs.nvidia.com/cuda/cuda-installation-guide-linux/#axzz4VZnqTJ2A).
 <pre> $ <b>sudo apt-get install cuda-command-line-tools</b> </pre>
 
 添加路径到 `LD_LIBRARY_PATH` 环境变量:
