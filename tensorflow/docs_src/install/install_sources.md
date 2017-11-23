@@ -1,9 +1,9 @@
 # 通过源码安装 TensorFlow
 
-本文将解释如何编译 TensorFlow 源代码为二进制文件，并通过二进制文件安装 TensorFlow，
+本文将解释如何编译 TensorFlow 源代码为二进制文件，并通过二进制文件安装 TensorFlow。
 需要注意的是，我们已经为 Linuc，Mac 和 Windows 系统用户提供经过测试良好，预构建好的二进制 Tensorflow 文件，
 除此之外还提供 TensorFlow 的 [docker 镜像](https://hub.docker.com/r/tensorflow/tensorflow/)。
-所以除非你能熟练通过源码构建复杂程序包，并且可以解决一些在文档中没有提到的不可预测的情况，建议不要自己尝试构建二进制 TensorFlow 代码。
+所以，除非你能熟练通过源码构建复杂程序包，并且可以解决一些在文档中没有提到的不可预测的情况，建议不要自己尝试构建二进制 TensorFlow 代码。
 
 如果上一段话没有吓退你，很高兴。这份指南将解释如何在以下操作系统上构建 TensorFlow：
 *   Ubuntu
