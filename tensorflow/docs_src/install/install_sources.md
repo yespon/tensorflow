@@ -169,7 +169,7 @@ $ <b>sudo apt-get install python3-numpy python3-dev python3-pip python3-wheel</b
 ### 可选项: 安装支持 GPU 的 TensorFlow 时需要的前提条件 
 
 如果你没有安装 brew，可以参考
-[指导](http://brew.sh/).
+[brew 安装指导](http://brew.sh/)。
 
 安装完 brew, 按照以下命令安装 GNU 工具:
 
@@ -177,12 +177,12 @@ $ <b>sudo apt-get install python3-numpy python3-dev python3-pip python3-wheel</b
 
 如果你想编译 TensorFlow 而且安装的是 XCode 7.3 以及 CUDA 7.5，那么请注意 XCode 7.3 不能兼容 CUDA 7.5.为了弥补这个问题可以参考以下步骤
 
-  * 更新 CUDA 到 8.0.
-  * 下载 Xcode 7.2 并执行以下命令，设置其作为默认的编辑器:
+  * 更新 CUDA 到 8.0
+  * 下载 Xcode 7.2 并执行以下命令，设置其作为默认的编辑器:
 
     <pre> $ <b>sudo xcode-select -s /Application/Xcode-7.2/Xcode.app</b></pre>
 
-**注意:** 你的系统需要支持 NVIDIA 软件需求，具体参考以下文档
+**注意:** 你的系统需要满足 NVIDIA 软件的需求，具体参考以下文档：
 
 
   * @{$install_linux#NVIDIARequirements$Installing TensorFlow on Linux}
@@ -197,7 +197,7 @@ $ <b>sudo apt-get install python3-numpy python3-dev python3-pip python3-wheel</b
 你必须在创建 pip 包以及安装 TensorFlow *之前*运行这个脚本。
 
 如果你希望构建的 TensorFlow 支持 GPU，`configure`将会要求你指明安装在系统上的 Cuda 以及 cuDNN 的版本，
-明确选择期望的版本取代默认选项。
+指明需要安装的版本替代默认选项。
 
 `configure` 将会询问以下内容:
 
@@ -205,9 +205,8 @@ $ <b>sudo apt-get install python3-numpy python3-dev python3-pip python3-wheel</b
 Please specify optimization flags to use during compilation when bazel option "--config=opt" is specified [Default is -march=native]
 </pre>
 
-这里指的是可以在后面指定你用来[构建 pip 安装包](#build-the-pip-package) 的 Bazel 方式。
-我们推荐使用默认选项(`-march=native`)，这个
-会根据你本地机器的 CPU 类型优化生成的代码，需要参考
+这里指的是可以在命令后面指定你用来[构建 pip 安装包](#build-the-pip-package) 的 Bazel 方式。
+我们推荐使用默认选项(`-march=native`)，这个会根据你本地机器的 CPU 类型优化生成的代码，
 如果你正在构建的 TensorFlow 的 CPU 类型与将要运行的 CPU 类型不同，需要参考[the gcc
 documentation](https://gcc.gnu.org/onlinedocs/gcc-4.5.3/gcc/i386-and-x86_002d64-Options.html)进一步的优化。
 
@@ -257,15 +256,14 @@ MPI support will not be enabled for TensorFlow
 Configuration finished
 </pre>
 
-如果你告知 `configure` 去支持 GPU ， `configure` 将会创建一个规范的符号链接你系统上的 Cuda 库，
-因此每次你改变 Cuda 库路径时候你必须在重新调用 <code>bazel build</code> 命令前运行 `configure` 脚本。
+如果你告知 `configure` 支持 GPU ，`configure` 将会创建一个固定的链接指定你系统上的 Cuda 库路径，
+因此每次你改变 Cuda 库路径时候你必须在重新执行`configure` 脚本，在你调用 <code>bazel build</code> 命令之前。
 
 注意以下几点:
 
-
   * 虽然可以构建 Cuda 和 non-Cuda 配置在同样的源代码树,我们建议在相同的源代码树运行 `bazel clean` 当切换这两个配置。
- 
-  * 如果你在运行 `bazel build` 命令之前没有运行 `configure` 脚本* *, `bazel build` 命令将会失败。
+  * 如果你在运行 `bazel build` 命令之前没有运行 `configure` 脚本* *, `bazel build` 命令将会失败。
+
 
 ## 构建 pip 包
 
@@ -287,15 +285,11 @@ ABI 兼容性允许针对TensorFlow pip包进行自定义操作，从而使你�
 <b>提示:</b> 
 通常情况下，源代码构建 TensorFlow 会占用大量内存，如果你的系统内存紧张，
 可以在调用`bazel`时指明 <code>--local_resources 2048,.5,1.0</code> 限制使用内存范围
-By default, building TensorFlow from sources consumes 
-
-
 
  <code>bazel build</code> 命令执行一个叫
  `build_pip_package`
  的脚本，执行这个脚本将会在 `/tmp/tensorflow_pkg` 目录下构建一个 `.whl` 文件。
  
-
 <pre>
 $ <b>bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg</b>
 </pre>
@@ -316,7 +310,8 @@ $ <b>sudo pip install /tmp/tensorflow_pkg/tensorflow-1.4.0rc0-py2-none-any.whl</
 按照以下说明验证 TensorFlow 是否安装成功：
 
 启动终端。
-通过 `cd` 改变当前所在目录，在除之前调用 `configure` 命令的 `tensorflow` 子目录之外的任意文件夹下执行。
+
+通过 `cd` 改变当前所在目录，在任意的任意文件夹下（除之前调用 `configure` 命令的 `tensorflow` 子目录）
 调用 python：
 <pre>$ <b>python</b></pre>
 
@@ -335,9 +330,9 @@ print(sess.run(hello))
 <pre>Hello, TensorFlow!</pre>
 
 如果你是 TensorFlow 新手参考 @{$get_started/get_started$Getting Started with
-TensorFlow}.
+TensorFlow}。
 
-如果系统输出错误信息, 参考 [常见安装问题](#common_installation_problems).
+如果系统输出错误信息, 参考 [常见安装问题](#common_installation_problems)。
 
 ## 常见安装问题
 
@@ -348,11 +343,10 @@ TensorFlow}.
   * @{$install_windows#CommonInstallationProblems$Installing TensorFlow on Windows}
 
 
-除了这两个指南中记录的错误之外，还有下表记录了其他一些在构建 TensorFlow 时遇到的错误。 
+除了这两个指南中记录的错误之外，下面的表中还记录了其他一些在构建 TensorFlow 时遇到的错误。 
 请注意，我们在 Stack Overflow 回答关于构建和安装问题时遇到的问题。
-如果遇到前面的指南中以及下表未提及的错误消息，在 Stack Overflow 搜索它。如果
+如果遇到前面的指南中以及下表未提及的错误消息，在 Stack Overflow 搜索。如果
 Stack Overflow 没有相关回答，在 Stack Overflow 上提一个新的问题并指定 `tensorflow` 标签。
-
 
 <table>
 <tr> <th>Stack Overflow 链接</th> <th> 错误信息 </th> </tr>
