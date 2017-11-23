@@ -347,24 +347,21 @@ TensorFlow}.
 
 ## 常见安装问题
 
-The installation problems you encounter typically depend on the
-operating system.  See the "Common installation problems" section
-of one of the following guides:
+常见安装问题一般与操作系统有关，参考以下部分关于安装问题的指南：
 
   * @{$install_linux#CommonInstallationProblems$Installing TensorFlow on Linux}
   * @{$install_mac#CommonInstallationProblems$Installing TensorFlow on Mac OS}
   * @{$install_windows#CommonInstallationProblems$Installing TensorFlow on Windows}
 
-Beyond the errors documented in those two guides, the following table
-notes additional errors specific to building TensorFlow.  Note that we
-are relying on Stack Overflow as the repository for build and installation
-problems.  If you encounter an error message not listed in the preceding
-two guides or in the following table, search for it on Stack Overflow.  If
-Stack Overflow doesn't show the error message, ask a new question on
-Stack Overflow and specify the `tensorflow` tag.
+
+除了这两个指南中记录的错误之外，还有下表记录了其他一些在构建 TensorFlow 时遇到的错误。 
+请注意，我们在 Stack Overflow 回答关于构建和安装问题时遇到的问题。
+如果遇到前面的指南中以及下表未提及的错误消息，在 Stack Overflow 搜索它。如果
+Stack Overflow 没有相关回答，在 Stack Overflow 上提一个新的问题并指定 `tensorflow` 标签。
+
 
 <table>
-<tr> <th>Stack Overflow Link</th> <th>Error Message</th> </tr>
+<tr> <th>Stack Overflow 链接</th> <th> 错误信息 </th> </tr>
 
 <tr>
   <td><a
@@ -393,7 +390,7 @@ Stack Overflow and specify the `tensorflow` tag.
 </tr>
 </table>
 
-## Tested source configurations
+## 经过测试的源配置
 **Linux**
 <table>
 <tr><th>Version:</th><th>CPU/GPU:</th><th>Python Version:</th><th>Compiler:</th><th>Build Tools:</th><th>cuDNN:</th><th>CUDA:</th></tr>
