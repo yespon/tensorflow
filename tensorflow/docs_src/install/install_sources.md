@@ -18,12 +18,11 @@
 ## 决定安装哪种类型的 TensorFlow 
 
 你需要从以下多种类型的 TensorFlow 中选择一个安装并构建：
-* **仅支持 CPU 的TensorFlow **. 如果你的系统不支持 NVIDIVA 的 GPU，需要安装这个版本。
+* **仅支持 CPU 的TensorFlow**. 如果你的系统不支持 NVIDIVA 的 GPU，需要安装这个版本。
   值得注意的是，这个版本的 TensorFlow 通常容易安装构建，所以即使你有 NVIDIA 的 GPU，我们仍然推荐你先安装这个版本。
   
-* **支持 GPU 的 TensorFlow **. TensorFlow 程序在 GPU 上运行会明显比在 CPU 上快。
-  因此，如果你的系统有 NVIDIA 的 GPU，同时你需要运行对性能要求苛刻的程序时，你就需要安装这个版本的 TensorFlow，
-  不仅需要 NVIDIA 的 GPU，你的系统还需要满足 NVIDIA 软件的要求，具体描述参考以下文档：
+* **支持 GPU 的 TensorFlow**. TensorFlow 程序在 GPU 上运行会明显比在 CPU 上快。
+  因此，如果你的系统有 NVIDIA 的 GPU，同时你需要运行对性能要求苛刻的程序时，你就需要安装这个版本的 TensorFlow，不仅需要 NVIDIA 的 GPU，你的系统还需要满足 NVIDIA 软件的要求，具体描述参考以下文档：
 
   * @{$install_linux#NVIDIARequirements$Installing TensorFlow on Ubuntu}
   * @{$install_mac#NVIDIARequirements$Installing TensorFlow on Mac OS}
@@ -65,7 +64,7 @@ $ <b>git checkout</b> <i>Branch</i> # 这里 <i>Branch</i> 就是创建的分�
   * 可选, 为了支持 GPU 而安装的 NVIDIA 软件包
 
 如果系统之前未安装 Bazel，需要按照以下说明安装
-[安装 Bazel](https://bazel.build/versions/master/docs/install.html).
+[安装 Bazel](https://bazel.build/versions/master/docs/install.html)。
 
 
 ### 安装 TensorFlow Python 依赖
@@ -90,7 +89,7 @@ $ <b>sudo apt-get install python3-numpy python3-dev python3-pip python3-wheel</b
 </pre>
 
 
-### 可选项: 安装支持 GPU 的 TensorFlow 之前的一些准备条件：
+### 可选: 安装支持 GPU 的 TensorFlow 之前的一些准备条件：
 
 如果你构建的 TensorFlow 不支持 GPU，跳过以下步骤。
 
@@ -113,7 +112,7 @@ $ <b>sudo apt-get install python3-numpy python3-dev python3-pip python3-wheel</b
     [NVIDIA 文档](https://developer.nvidia.com/cudnn),
     注意将路径添加到 `LD_LIBRARY_PATH` 环境变量。
     
-最后, 你必须安装 与 CUDA 工具包匹配的 `libcupti`>= 8.0
+    最后, 你必须安装 与 CUDA 工具包匹配的 `libcupti`>= 8.0
 
 <pre> $ <b>sudo apt-get install cuda-command-line-tools</b> </pre>
 
@@ -129,7 +128,7 @@ $ <b>sudo apt-get install python3-numpy python3-dev python3-pip python3-wheel</b
 ### 接下来
 
 环境搭建好之后，你必须参考
-[安装指南](#ConfigureInstallation).
+[安装指南](#ConfigureInstallation)。
 
 
 <a name="PrepareMac"></a>
@@ -137,20 +136,20 @@ $ <b>sudo apt-get install python3-numpy python3-dev python3-pip python3-wheel</b
 
  构建 TensorFlow 之前, 须在你的系统上安装以下工具:
 
-  * bazel
-  * TensorFlow Python 依赖.
-  * 可选项：NVIDIA 工具包（支持 GPU 的 TensorFlow 版本）.
 
+  * bazel
+  * TensorFlow Python 依赖
+  * 可选项：NVIDIA 工具包（支持 GPU 的 TensorFlow 版本）
 
 ### 安装 bazel
 
 如果系统没有安装 Bazel ，参考
-[指导](https://bazel.build/versions/master/docs/install.html#mac-os-x)安装 Bazel.
+[安装 Bazel](https://bazel.build/versions/master/docs/install.html#mac-os-x)
 
 
 ### 安装 python 依赖
 
-安装 TensorFlow，需要安装以下依赖饱：
+安装 TensorFlow，需要安装以下依赖包：
 
   * six
   * numpy, 一个 TensorFlow 需要的用于数值处理的包.
