@@ -71,8 +71,10 @@
 ```
 如果系统的输出如下所示，那就说明您可以开始在上面撰写 TensorFlow 的程序了：
 <pre>Hello, TensorFlow!</pre>
-如果您刚刚接触 TensorFlow，请参考文档[TensorFlow 入门指南](https://github.com/xitu/tensorflow/blob/zh-hans/tensorflow/docs_src/get_started/get_started.md)
-如果系统输出了一个错误信息而不是一个打招呼提示，请查看[常见安装问题](#常见安装问题).
+如果您刚刚接触 TensorFlow，请参考文档[TensorFlow 入门指南](https://github.com/xitu/tensorflow/blob/zh-hans/tensorflow/docs_src/get_started/get_started.md)。
+
+如果系统输出了一个错误信息而不是一个打招呼提示，请查看[常见安装问题](#常见安装问题)。
+
 这里也有一个关于 Windows 上 TensorFlow 安装很有用的[文档](https://gist.github.com/mrry/ee5dbcfdd045fa48a27d56664411d41c)。
 
 
