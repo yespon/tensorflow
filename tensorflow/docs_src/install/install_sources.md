@@ -33,19 +33,17 @@
 
 首先从克隆 TensorFlow 仓库开始
 
-克隆 **最新** TensorFlow 仓库, 执行以下命令:
+执行以下命令，克隆 **最新** TensorFlow 仓库:
 
 <pre>$ <b>git clone https://github.com/tensorflow/tensorflow</b> </pre>
 
 <code>git clone</code> 命令创建一个命名为 “tensorflow”
- 的子目录。克隆完成后，你可以执行下面的命令，创建一个特定的分支（例如一个发布分支）
- After cloning, you may optionally build a
-**specific branch** (such as a release branch) by invoking the
-following commands:
+ 的子目录。克隆完成后，你可以执行下面的命令，创建一个**特定**的分支（例如一个发布分支):
+
 
 <pre>
 $ <b>cd tensorflow</b>
-$ <b>git checkout</b> <i>Branch</i> # where <i>Branch</i> is the desired branch
+$ <b>git checkout</b> <i>Branch</i> # 这里 <i>Branch</i> 就是创建的分支
 </pre>
 
 例如, 执行以下命令新建“r1.0”分支，替代 master 分支：
@@ -64,7 +62,7 @@ $ <b>git checkout</b> <i>Branch</i> # where <i>Branch</i> is the desired branch
 
   * bazel
   * TensorFlow Python 依赖
-  * 可选, 为了支持 GPU 而安装的 NVIDIA 软件包 
+  * 可选, 为了支持 GPU 而安装的 NVIDIA 软件包
 
 
 ### 安装 Bazel
