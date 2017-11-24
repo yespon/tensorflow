@@ -18,7 +18,7 @@ MNIST 是一个简单的计算机视觉数据集。它由如下手写数字的�
 
 ## 关于这个教程
 
-本教程会逐行解释[mnist_softmax.py](https://www.tensorflow.org/code/tensorflow/examples/tutorials/mnist/mnist_softmax.py) 中的代码发了生什么。
+本教程会逐行解释 [mnist_softmax.py](https://www.tensorflow.org/code/tensorflow/examples/tutorials/mnist/mnist_softmax.py) 中的代码发了生什么。
 
 您可以通过几种不同的方式使用本教程，其中包括：
 
