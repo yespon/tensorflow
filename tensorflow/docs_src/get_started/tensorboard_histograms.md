@@ -61,7 +61,7 @@ TensorFlow 用一个类似的方法去生成区间，但不同的是，它不只
 
 ## 覆盖模式
 
-左边的选项里允许你从 “并列模式” 转换到 “覆盖模式”：
+左边的选项里允许你从“并列模式”转换到“覆盖模式”：
 
 ![](https://www.tensorflow.org/images/tensorboard/histogram_dashboard/3_overlay_offset.png)
 
