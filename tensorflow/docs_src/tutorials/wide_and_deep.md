@@ -1,5 +1,5 @@
 > * 译者：[charsdavy](https://github.com/charsdavy)
-> * 校对者：
+> * 校对者：[MRNIU](https://github.com/MRNIU)
 
 # TensorFlow 广度和深度学习的教程
 
