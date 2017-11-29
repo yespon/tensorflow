@@ -2,14 +2,14 @@
 
 ## 支持的设备
 
-在一个典型的系统上，有多个计算设备。 在 TensorFlow 中，支持的设备类型是 “CPU” 和 “GPU” 。 它们都是字符串形式。
+在一个典型的系统上，有多个计算设备。 在 TensorFlow 中，支持的设备类型是“CPU”和“GPU”。 它们都是字符串形式。
 例如：
 
-*   `"/cpu:0"`: 你的机器上的CPU。
-*   `"/device:GPU:0"`: 你的机器上的GPU（如果有的话）。
-*   `"/device:GPU:1"`: 你的机器上的第二块 GPU ，以此类推。
+*   `"/cpu:0"`：你的机器上的 CPU。
+*   `"/device:GPU:0"`：你的机器上的 GPU（如果有的话）。
+*   `"/device:GPU:1"`：你的机器上的第二块 GPU ，以此类推。
 
-如果某个 TensorFlow 的操作同时有 CPU 和 GPU 的实现，当它被分配给设备（以执行）时，GPU 将被优先考虑。 例如，`matmul` 有 CPU 和 GPU 的内核实现，在同时具备 “cpu：0” 和 “gpu：0” 设备的系统上，将选择 “gpu：0” 来执行 “matmul”。
+如果某个 TensorFlow 的操作同时有 CPU 和 GPU 的实现，当它被分配给设备（以执行）时，GPU 将被优先考虑。 例如，`matmul` 有 CPU 和 GPU 的内核实现，在同时具备“cpu：0”和“gpu：0“设备的系统上，将选择“gpu：0”来执行“matmul”。
 
 ## 设备配置信息日志记录
 
@@ -74,7 +74,7 @@ MatMul: /job:localhost/replica:0/task:0/device:GPU:0
 ## 允许 GPU 显存增长
 
 
-默认情况下， Tensorflow 会使用所有 GPU 上的几乎所有的显存（取决于系统环境变量[`CUDA_VISIBLE_DEVICES`](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#env-vars)）去运行程序。这样做是为了通过减少[内存碎片](https://en.wikipedia.org/wiki/Fragmentation_\(computing\))来更有效利用设备上相对宝贵的GPU显存资源。
+默认情况下， Tensorflow 会使用所有 GPU 上的几乎所有的显存（取决于系统环境变量 [`CUDA_VISIBLE_DEVICES`](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#env-vars)）去运行程序。这样做是为了通过减少[内存碎片](https://en.wikipedia.org/wiki/Fragmentation_\(computing\))来更有效利用设备上相对宝贵的GPU显存资源。
 
 在某些情况下，进程仅分配一部分可用显存或视进程需要再行增加显存使用量这种做法是可取的。TensorFlow 在 Session 上提供了两个 Config 选项来设置。
 
