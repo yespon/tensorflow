@@ -23,7 +23,7 @@
 
 如果想要尝试本教程中的代码：
 
-1. 安装 TensorFlow ，[请前往此处](http://chars.tech/2017/09/26/tensorflow-pycharm-mac/)。
+1. 安装 TensorFlow，[请前往此处](http://chars.tech/2017/09/26/tensorflow-pycharm-mac/)。
 
 2. 下载 [教程代码](https://www.tensorflow.org/code/tensorflow/examples/learn/wide_n_deep_tutorial.py)。
 
@@ -88,7 +88,7 @@ workclass = tf.feature_column.categorical_column_with_vocabulary_list(
         "Local-gov", "?", "Self-emp-inc", "Without-pay", "Never-worked"
     ])
 
-# 展示一个哈希的例子:
+# 展示一个哈希的例子：
 occupation = tf.feature_column.categorical_column_with_hash_bucket(
     "occupation", hash_bucket_size=1000)
 native_country = tf.feature_column.categorical_column_with_hash_bucket(
