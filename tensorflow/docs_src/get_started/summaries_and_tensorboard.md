@@ -1,4 +1,4 @@
-## Tensorboard：可视化学习
+# Tensorboard：可视化学习面板
 
 Tensorflow 做的一些计算是复杂和混乱，就像训练深度神经网络。为了更易于理解、调试和优化Tensorflow程序，我们发布了一套可视化工具称为 Tensorboard。你可以使用 TensorBoard 图形化 Tensorflow 图，绘制图计算过程的定量指标，以及显示图的额外数据。TensorBoard 完成配置后，是这样的：
 
@@ -24,7 +24,7 @@ FileWriter 的构造函数需要包含 logdir，logdir 目录是非常重要的
 
 现在已经修改了你的图并且有一个 FileWriter，准备开始你的神经网络吧！如果您愿意，您可以单步运行合并汇总操作，并记录大量的训练数据。不过，这可能比你需要的数据更多。你可以每 n 步执行一次汇总。
 
-下面的代码示例是对[简单 MNIST 指南](https://www.tensorflow.org/get_started/mnist/beginners)的更改，其中我们额外每十步执行一次总结。如果你运行这个然后启动 Tensorboard—logdir=/tmp/tensorflow/mnist，你将能够可视化统计数据，例如在训练过程中权重或精确度是如何变化的。下面的代码是一个摘录，完整的资料在[这里](https://www.tensorflow.org/code/tensorflow/examples/tutorials/mnist/mnist_with_summaries.py)。
+下面的代码示例是对 [简单 MNIST 指南](https://www.tensorflow.org/get_started/mnist/beginners)的更改，其中我们额外每十步执行一次总结。如果你运行这个然后启动 Tensorboard—logdir=/tmp/tensorflow/mnist，你将能够可视化统计数据，例如在训练过程中权重或精确度是如何变化的。下面的代码是一个摘录，完整的资料在 [这里](https://www.tensorflow.org/code/tensorflow/examples/tutorials/mnist/mnist_with_summaries.py)。
 
 ```python
 def variable_summaries(var):
@@ -150,6 +150,6 @@ tensorboard —logdir=path/to/log-directory
 
 logdir 就是 FileWriter 序列化数据的目录。如果 logdir 目录包含子目录，并且子目录具有来自单独线程的序列化数据。如果 logdir 目录包含子目录，并且子目录具有来自单独线程的序列化数据，那么 Tensorboard 将统一展示这些可视化数据。一旦 TensorBoard 运行，你可以通过你的 Web 浏览器 localhost:6006， 查看 Tensorboard。你会在 Tensorboard 右上角看到导航标签。每个选项代表一组可以可视化的序列化数据
 
-关于如何使用 *“graph”* 来显示你的图的详细信息，你可以查看 [TensorBoard: Graph Visualization](https://www.tensorflow.org/get_started/graph_viz).
+关于如何使用 **“graph”** 来显示你的图的详细信息，你可以查看 [TensorBoard: Graph Visualization](https://www.tensorflow.org/get_started/graph_viz).
 
 更多关于 TensorBoard 的信息，查看 [TensorBoard's GitHub](https://github.com/tensorflow/tensorboard).
