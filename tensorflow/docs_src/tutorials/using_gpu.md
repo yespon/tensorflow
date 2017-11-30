@@ -2,7 +2,7 @@
 
 ## 支持的设备
 
-在一个典型的系统上，有多个计算设备。 在 TensorFlow 中，支持的设备类型是“CPU”和“GPU”。 它们都是字符串形式。
+在一个典型的系统上，有多个计算设备。在 TensorFlow 中，支持的设备类型是“CPU”和“GPU”。 它们都是字符串形式。
 例如：
 
 *   `"/cpu:0"`：你的机器上的 CPU。
@@ -74,7 +74,7 @@ MatMul: /job:localhost/replica:0/task:0/device:GPU:0
 ## 允许 GPU 显存增长
 
 
-默认情况下， Tensorflow 会使用所有 GPU 上的几乎所有的显存（取决于系统环境变量 [`CUDA_VISIBLE_DEVICES`](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#env-vars)）去运行程序。这样做是为了通过减少[内存碎片](https://en.wikipedia.org/wiki/Fragmentation_\(computing\))来更有效利用设备上相对宝贵的GPU显存资源。
+默认情况下，Tensorflow 会使用所有 GPU 上的几乎所有的显存（取决于系统环境变量 [`CUDA_VISIBLE_DEVICES`](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#env-vars)）去运行程序。这样做是为了通过减少[内存碎片](https://en.wikipedia.org/wiki/Fragmentation_\(computing\))来更有效利用设备上相对宝贵的GPU显存资源。
 
 在某些情况下，进程仅分配一部分可用显存或视进程需要再行增加显存使用量这种做法是可取的。TensorFlow 在 Session 上提供了两个 Config 选项来设置。
 
@@ -86,7 +86,7 @@ config.gpu_options.allow_growth = True
 session = tf.Session(config=config, ...)
 ```
 
-第二个选项是 `pre_process_gpu_memory_fraction`，它决定了每个可见的 GPU 应该被分配多大比例的显存。例如，对于每个 GPU，你想让 TensorFlow 仅仅分配总显存的 40% ，就这么做：
+第二个选项是 `pre_process_gpu_memory_fraction`，它决定了每个可见的 GPU 应该被分配多大比例的显存。例如，对于每个 GPU，你想让 TensorFlow 仅仅分配总显存的 40%，就这么做：
 
 ```python
 config = tf.ConfigProto()
