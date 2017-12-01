@@ -1,11 +1,11 @@
 # 通过源码安装 TensorFlow
 
-本文将解释如何编译 TensorFlow 源代码为二进制文件，并通过二进制文件安装 TensorFlow。
-需要注意的是，我们已经为 Linuc，Mac 和 Windows 系统用户提供经过测试良好，预构建好的二进制 Tensorflow 文件，
+本文将解释如何将 TensorFlow 源代码编译为二进制文件，并通过它安装 TensorFlow。
+需要注意的是，我们已经为 Linuc，Mac 和 Windows 用户提供过测试良好、预构建好的二进制 Tensorflow 文件，
 除此之外还提供 TensorFlow 的 [docker 镜像](https://hub.docker.com/r/tensorflow/tensorflow/)。
 所以，除非你能熟练通过源码构建复杂程序包，并且可以解决一些在文档中没有提到的不可预测的情况，建议不要自己尝试构建二进制 TensorFlow 代码。
 
-如果上一段话没有吓退你，很高兴。这份指南将解释如何在以下操作系统上构建 TensorFlow：
+如果上一段话没有吓退你，那么很好。这份指南将解释如何在以下操作系统上构建 TensorFlow：
 *   Ubuntu
 *   Mac OS X
 
@@ -17,7 +17,7 @@
 
 ## 决定安装哪种类型的 TensorFlow 
 
-你需要从以下多种类型的 TensorFlow 中选择一个安装并构建：
+你需要从以下几种类型的 TensorFlow 中选择一个构建并安装：
 * **仅支持 CPU 的TensorFlow**. 如果你的系统不支持 NVIDIVA 的 GPU，需要安装这个版本。
   值得注意的是，这个版本的 TensorFlow 通常容易安装构建，所以即使你有 NVIDIA 的 GPU，我们仍然推荐你先安装这个版本。
   
@@ -52,7 +52,7 @@ $ <b>git checkout</b> <i>Branch</i> # 这里 <i>Branch</i> 就是创建的分�
 接下来你需要准备为
 [Linux](#PrepareLinux)
 或者
-[Mac OS](#PrepareMac)准备环境。
+[Mac OS](#PrepareMac) 准备环境。
 
 <a name="#PrepareLinux"></a>
 ## 为 Linux 准备环境
@@ -69,7 +69,7 @@ $ <b>git checkout</b> <i>Branch</i> # 这里 <i>Branch</i> 就是创建的分�
 
 ### 安装 TensorFlow Python 依赖
 
-安装 TensorFlow之前, 你必须安装以下安装包:
+安装 TensorFlow 之前, 你必须安装以下安装包:
 
   * `numpy`, 一个 TensorFlow 需要安装的用于数值处理的包。
   * `dev`, 用于添加 Python 扩展包。
@@ -112,7 +112,7 @@ $ <b>sudo apt-get install python3-numpy python3-dev python3-pip python3-wheel</b
     注意将路径添加到 `LD_LIBRARY_PATH` 环境变量。
     
     
-最后,你还必须安装Cuda工具包的`libcupti> = 8.0`。
+最后,你还必须安装Cuda工具包的 `libcupti> = 8.0`。
 
 [NVIDIA's documentation](http://docs.nvidia.com/cuda/cuda-installation-guide-linux/#axzz4VZnqTJ2A).
 <pre> $ <b>sudo apt-get install cuda-command-line-tools</b> </pre>
@@ -176,7 +176,7 @@ $ <b>sudo apt-get install python3-numpy python3-dev python3-pip python3-wheel</b
 
 <pre>$ <b>brew install coreutils</b></pre>
 
-如果你想编译 TensorFlow 而且安装的是 XCode 7.3 以及 CUDA 7.5，那么请注意 XCode 7.3 不能兼容 CUDA 7.5.为了弥补这个问题可以参考以下步骤
+如果你想编译 TensorFlow 而且安装的是 XCode 7.3 以及 CUDA 7.5，那么请注意 XCode 7.3 不能兼容 CUDA 7.5 .为了弥补这个问题可以参考以下步骤
 
   * 更新 CUDA 到 8.0
   * 下载 Xcode 7.2 并执行以下命令，设置其作为默认的编辑器:
@@ -193,11 +193,11 @@ $ <b>sudo apt-get install python3-numpy python3-dev python3-pip python3-wheel</b
 <a name="ConfigureInstallation"></a>
 ## 配置安装
 
-在文件夹根目录里有一个命名为<code>configure</code> 的 bash 脚本。
+在文件夹根目录里有一个命名为 <code>configure</code> 的 bash 脚本。
 这个脚本会要求你定义与 TensorFlow 相关依赖路径以及指定其他相关的配置选项，例如编译器标记。
 你必须在创建 pip 包以及安装 TensorFlow *之前*运行这个脚本。
 
-如果你希望构建的 TensorFlow 支持 GPU，`configure`将会要求你指明安装在系统上的 Cuda 以及 cuDNN 的版本，
+如果你希望构建的 TensorFlow 支持 GPU，`configure` 将会要求你指明安装在系统上的 Cuda 以及 cuDNN 的版本，
 指明需要安装的版本替代默认选项。
 
 `configure` 将会询问以下内容:
@@ -206,9 +206,9 @@ $ <b>sudo apt-get install python3-numpy python3-dev python3-pip python3-wheel</b
 Please specify optimization flags to use during compilation when bazel option "--config=opt" is specified [Default is -march=native]
 </pre>
 
-这里指的是可以在命令后面指定你用来[构建 pip 安装包](#build-the-pip-package) 的 Bazel 方式。
-我们推荐使用默认选项(`-march=native`)，这个会根据你本地机器的 CPU 类型优化生成的代码，
-如果你正在构建的 TensorFlow 的 CPU 类型与将要运行的 CPU 类型不同，需要参考[the gcc
+这里指的是可以在命令后面指定你用来 [构建 pip 安装包](#build-the-pip-package) 的 Bazel 方式。
+我们推荐使用默认选项 (`-march=native`)，这个会根据你本地机器的 CPU 类型优化生成的代码，
+如果你正在构建的 TensorFlow 的 CPU 类型与将要运行的 CPU 类型不同，需要参考 [the gcc
 documentation](https://gcc.gnu.org/onlinedocs/gcc-4.5.3/gcc/i386-and-x86_002d64-Options.html)进一步的优化。
 
 这里展示一个运行 `configure` 脚本的例子，注意你自己的输入可能不同于例子中的输入
@@ -258,29 +258,29 @@ Configuration finished
 </pre>
 
 如果你告知 `configure` 支持 GPU ，`configure` 将会创建一个固定的链接指定你系统上的 Cuda 库路径，
-因此每次你改变 Cuda 库路径时候你必须在重新执行`configure` 脚本，在你调用 <code>bazel build</code> 命令之前。
+因此每次你改变 Cuda 库路径时候你必须在重新执行 `configure` 脚本，在你调用 <code>bazel build</code> 命令之前。
 
 注意以下几点:
 
-  * 虽然可以构建 Cuda 和 non-Cuda 配置在同样的源代码树,我们建议在相同的源代码树运行 `bazel clean` 当切换这两个配置。
-  * 如果你在运行 `bazel build` 命令之前没有运行 `configure` 脚本* *, `bazel build` 命令将会失败。
+  * 虽然可以在同样的源代码树构建 Cuda 和 non-Cuda 的配置,我们还是建议在相同的源代码树运行时，使用 bazel clean 切换这两个配置。
+  * 如果你在运行 `bazel build` 命令 *之前* 没有运行 `configure` 脚本* *, `bazel build` 命令将会失败。
 
 
 ## 构建 pip 包
 
-仅支持 CPU 的情况下，调用下面的命令建立一个TensorFlow pip 包：
+仅支持 CPU 的情况下，调用下面的命令建立一个 TensorFlow pip 包：
 <pre>
 $ <b>bazel build --config=opt //tensorflow/tools/pip_package:build_pip_package</b>
 </pre>
 
 
-支持 GPU 的情况下，调用下面的命令建立一个TensorFlow pip 包：
+支持 GPU 的情况下，调用下面的命令建立一个 TensorFlow pip 包：
 
 <pre>$ <b>bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:build_pip_package</b> </pre>
 
 **注意需要在 gcc 5 或者更高版本上:** 
-这个二进制 pip 包适用在用 gcc 4 构建的 TensorFlow 网站，这个二进制包使用的是老的 ABI（应用程序二进制接口），为了能兼容老的 ABI，你需要在`bazel build`命令后添加`--cxxopt="-D_GLIBCXX_USE_CXX11_ABI=0"`。
-ABI 兼容性允许针对TensorFlow pip包进行自定义操作，从而使你构建的包能继续运行。
+这个二进制 pip 包适用在用 gcc 4 构建的 TensorFlow 网站，这个二进制包使用的是老的 ABI（应用程序二进制接口），为了能兼容旧的 ABI，你需要在 `bazel build`命令后添加 `--cxxopt="-D_GLIBCXX_USE_CXX11_ABI=0"`。
+ABI 兼容性允许针对 TensorFlow pip 包进行自定义操作，从而使你构建的包能继续运行。
 
 
 <b>提示:</b> 
@@ -299,7 +299,7 @@ $ <b>bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pk
 ## 安装 pip 包
 
 调用 `pip install` 安装 pip 包。
-`.whl`的文件名与你的平台有关，例如下面的命令将会在 Linux 上安装 TensorFlow 1.4rc0。
+`.whl` 的文件名与你的平台有关，例如下面的命令将会在 Linux 上安装 TensorFlow 1.4rc0。
 
 
 <pre>
@@ -312,11 +312,11 @@ $ <b>sudo pip install /tmp/tensorflow_pkg/tensorflow-1.4.0rc0-py2-none-any.whl</
 
 启动终端。
 
-通过 `cd` 改变当前所在目录，在任意的任意文件夹下（除之前调用 `configure` 命令的 `tensorflow` 子目录）
+通过 `cd` 改变当前所在目录，在任意文件夹下（除之前调用 `configure` 命令的 `tensorflow` 子目录）
 调用 python：
 <pre>$ <b>python</b></pre>
 
-在python交互式shell中输入以下代码：
+在 python 交互式 shell 中输入以下代码：
 
 ```python
 # Python
@@ -330,14 +330,14 @@ print(sess.run(hello))
 
 <pre>Hello, TensorFlow!</pre>
 
-如果你是 TensorFlow 新手参考 @{$get_started/get_started$Getting Started with
+如果你是 TensorFlow 新手，可以参考 @{$get_started/get_started$Getting Started with
 TensorFlow}。
 
 如果系统输出错误信息, 参考 [常见安装问题](#common_installation_problems)。
 
 ## 常见安装问题
 
-常见安装问题一般与操作系统有关，参考以下部分关于安装问题的指南：
+常见安装问题一般与操作系统有关，参考以下关于安装问题的部分：
 
   * @{$install_linux#CommonInstallationProblems$Installing TensorFlow on Linux}
   * @{$install_mac#CommonInstallationProblems$Installing TensorFlow on Mac OS}
